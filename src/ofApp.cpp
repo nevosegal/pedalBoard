@@ -82,11 +82,10 @@ void ofApp::mousePressed(int x, int y, int button){
 //--------------------------------------------------------------
 void ofApp::mouseReleased(int x, int y, int button){
     for(int i = 0; i < numPedals; i++){
-        BypassButton bb = pedals.at(i).getBypassButton();
+        BypassButton & bb = pedals.at(i).getBypassButton();
         if(x > (bb.x - bb.radius) && x < (bb.x + bb.radius) && y > (bb.y - bb.radius) && y < (bb.y + bb.radius)){
             bb.toggle();
         }
-            
     }
 }
 

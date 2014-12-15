@@ -26,7 +26,7 @@ public:
     void setup();
     void update();
     void draw();
-    BypassButton getBypassButton();
+    BypassButton& getBypassButton();
     
     //variables
     double x, y, xsize, ysize;

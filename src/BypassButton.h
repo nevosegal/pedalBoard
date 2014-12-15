@@ -15,12 +15,10 @@
 class BypassButton{
 
 public:
-//    ~BypassButton();
     BypassButton();
     BypassButton(double x, double y);
     
     //methods
-
     void setup();
     void update();
     void draw();

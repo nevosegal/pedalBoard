@@ -34,6 +34,6 @@ void Pedal::draw(){
     bypass_btn.draw();
 }
 
-BypassButton Pedal::getBypassButton(){
+BypassButton& Pedal::getBypassButton(){
     return bypass_btn;
 }
