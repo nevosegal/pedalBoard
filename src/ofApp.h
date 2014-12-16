@@ -30,7 +30,7 @@ public:
     
     int		initialBufferSize; /* buffer size */
     int		sampleRate;
-    
+    double prevx, prevy;
     double wave,sample,outputs[2];
     ofxMaxiMix mymix;
     ofxMaxiOsc sine1;

@@ -32,9 +32,9 @@ void BypassButton::update(){
 void BypassButton::draw(){
 
     if(bypassed){
-        ofSetHexColor(0xff0000);
+        ofSetColor(200, 35, 35, 75);
     }else{
-        ofSetHexColor(0x00ff00);
+        ofSetColor(200, 35, 35);
     }
     ofCircle(x, y, radius);
 }

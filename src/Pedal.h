@@ -27,10 +27,12 @@ public:
     void update();
     void draw();
     BypassButton& getBypassButton();
+    void move(double x, double y);
     
     //variables
     double x, y, xsize, ysize;
     BypassButton bypass_btn;
+    bool engaged;
 };
 
 #endif /* defined(__pedalBoard__Pedal__) */

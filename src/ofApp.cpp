@@ -15,6 +15,7 @@ void ofApp::setup(){
     ofSetupScreen();
     ofBackground(0, 0, 0);
     ofSetVerticalSync(true);
+//    engaged = false;
 
     sampleRate 			= 44100; /* Sampling Rate */
     initialBufferSize	= 512;	/* Buffer Size. you have to fill this buffer with sound*/
@@ -71,12 +72,28 @@ void ofApp::mouseMoved(int x, int y ){
 
 //--------------------------------------------------------------
 void ofApp::mouseDragged(int x, int y, int button){
-    
+    cout << prevx<<endl;
+    for(int i = 0; i < numPedals; i++){
+        Pedal& p = pedals.at(i);
+        if(x > p.x && x < (p.x + p.xsize) && y > p.y && y < (p.y + p.ysize)){
+            double deltax = x-prevx;
+            double deltay = y-prevy;
+            p.move(deltax, deltay);
+            prevx = x;
+            prevy = y;
+        }
+    }
 }
 
 //--------------------------------------------------------------
 void ofApp::mousePressed(int x, int y, int button){
-
+    for(int i = 0; i < numPedals; i++){
+        Pedal& p = pedals.at(i);
+        if(x > p.x && x < (p.x + p.xsize) && y > p.y && y < (p.y + p.ysize)){
+            prevx = x;
+            prevy = y;
+       }
+   }
 }
 
 //--------------------------------------------------------------

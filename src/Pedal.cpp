@@ -18,7 +18,7 @@ Pedal::Pedal(double x, double y){
     this->y = y;
     xsize = 120;
     ysize = 200;
-    bypass_btn = *new BypassButton(x+(xsize/2),y+(ysize/2));
+    bypass_btn = *new BypassButton(x+(xsize/2),y+(2*ysize/3));
 }
 
 void Pedal::setup(){
@@ -36,4 +36,11 @@ void Pedal::draw(){
 
 BypassButton& Pedal::getBypassButton(){
     return bypass_btn;
+}
+
+void Pedal::move(double x, double y){
+    this->x += x;
+    this->y += y;
+    bypass_btn.x = this->x + (xsize/2);
+    bypass_btn.y = this->y + (2*ysize/3);
 }
