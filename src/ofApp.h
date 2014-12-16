@@ -3,6 +3,8 @@
 #include "ofMain.h"
 #include "ofxMaxim.h"
 #include "Pedal.h"
+#include "DelayPedal.h"
+#include "ofxUI.h"
 #include <vector>
 
 
@@ -31,14 +33,9 @@ public:
     int		initialBufferSize; /* buffer size */
     int		sampleRate;
     double prevx, prevy;
-    double wave,sample,outputs[2];
-    ofxMaxiMix mymix;
-    ofxMaxiOsc sine1;
-    ofxMaxiSample beats,beat;
-//    Pedal pedal;
-    
     int numPedals;
     std::vector<Pedal> pedals;
+    bool engaged;
     
     float *myInput;
     

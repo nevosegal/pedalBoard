@@ -15,12 +15,11 @@ void ofApp::setup(){
     ofSetupScreen();
     ofBackground(0, 0, 0);
     ofSetVerticalSync(true);
-//    engaged = false;
-
+    engaged = false;
     sampleRate 			= 44100; /* Sampling Rate */
     initialBufferSize	= 512;	/* Buffer Size. you have to fill this buffer with sound*/
     myInput = new float[initialBufferSize];
-    numPedals = 3;
+    numPedals = 4;
     for(int i = 0 ; i < numPedals; i++){
         pedals.push_back(*new Pedal(10 + i*200, 10));
     }
@@ -49,7 +48,6 @@ void ofApp::audioRequested 	(float * output, int bufferSize, int nChannels){
 }
 //--------------------------------------------------------------
 void ofApp::audioReceived (float * input, int bufferSize, int nChannels){
-    
     for (int i = 0; i < bufferSize; i++){
         myInput[i] = input[i];
     }
@@ -72,7 +70,6 @@ void ofApp::mouseMoved(int x, int y ){
 
 //--------------------------------------------------------------
 void ofApp::mouseDragged(int x, int y, int button){
-    cout << prevx<<endl;
     for(int i = 0; i < numPedals; i++){
         Pedal& p = pedals.at(i);
         if(x > p.x && x < (p.x + p.xsize) && y > p.y && y < (p.y + p.ysize)){
@@ -122,5 +119,9 @@ void ofApp::dragEvent(ofDragInfo dragInfo){
     
 }
 void ofApp::exit(){
+    
+    for(int i = 0; i < numPedals; i++){
+        pedals.at(i).exit();
+    }
     ofSoundStreamClose();
 }

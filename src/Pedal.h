@@ -12,6 +12,7 @@
 #include <stdio.h>
 #include "ofMain.h"
 #include "BypassButton.h"
+#include "ofxUI.h"
 
 class Pedal{
     
@@ -28,11 +29,13 @@ public:
     void draw();
     BypassButton& getBypassButton();
     void move(double x, double y);
+    virtual float* effect(float* input);
     
     //variables
     double x, y, xsize, ysize;
     BypassButton bypass_btn;
     bool engaged;
+
 };
 
 #endif /* defined(__pedalBoard__Pedal__) */

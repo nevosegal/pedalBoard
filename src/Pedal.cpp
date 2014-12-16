@@ -32,6 +32,7 @@ void Pedal::draw(){
     ofSetHexColor(0xffffff);
     ofRectRounded(x,y,xsize, ysize, 8);
     bypass_btn.draw();
+    
 }
 
 BypassButton& Pedal::getBypassButton(){
@@ -43,4 +44,9 @@ void Pedal::move(double x, double y){
     this->y += y;
     bypass_btn.x = this->x + (xsize/2);
     bypass_btn.y = this->y + (2*ysize/3);
+}
+
+float* Pedal::effect(float* input){
+    cout<<"this is inside Pedal"<<endl;
+    return input;
 }
