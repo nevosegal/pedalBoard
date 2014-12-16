@@ -79,6 +79,7 @@
 		7DAAA35F1A405A0500FAD9BA /* tinyxmlerror.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7DAAA35B1A405A0500FAD9BA /* tinyxmlerror.cpp */; };
 		7DAAA3601A405A0500FAD9BA /* tinyxmlparser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7DAAA35C1A405A0500FAD9BA /* tinyxmlparser.cpp */; };
 		7DAAA3631A4061A500FAD9BA /* Knob.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7DAAA3611A4061A500FAD9BA /* Knob.cpp */; };
+		7DAAA3691A40902F00FAD9BA /* InputOutput.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7DAAA3671A40902F00FAD9BA /* InputOutput.cpp */; };
 		837220E80EB56CD44AD27F2A /* ofxSlider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 15F2C6477A769C03A56D1401 /* ofxSlider.cpp */; };
 		856AA354D08AB4B323081444 /* ofxBaseGui.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9604B925D32EE39065747725 /* ofxBaseGui.cpp */; };
 		879A251454401BC0B6E4F238 /* OscTypes.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9BFFBBF4CC43DEE890B3C3E /* OscTypes.cpp */; };
@@ -320,6 +321,8 @@
 		7DAAA35C1A405A0500FAD9BA /* tinyxmlparser.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = tinyxmlparser.cpp; sourceTree = "<group>"; };
 		7DAAA3611A4061A500FAD9BA /* Knob.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Knob.cpp; sourceTree = "<group>"; };
 		7DAAA3621A4061A500FAD9BA /* Knob.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Knob.h; sourceTree = "<group>"; };
+		7DAAA3671A40902F00FAD9BA /* InputOutput.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = InputOutput.cpp; sourceTree = "<group>"; };
+		7DAAA3681A40902F00FAD9BA /* InputOutput.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InputOutput.h; sourceTree = "<group>"; };
 		7E57AAE3FAB29F87D19451BC /* sampling.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = sampling.h; path = ../../../addons/ofxOpenCv/libs/opencv/include/opencv2/flann/sampling.h; sourceTree = SOURCE_ROOT; };
 		802251BAF1B35B1D67B32FD0 /* ofxSliderGroup.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ofxSliderGroup.cpp; path = ../../../addons/ofxGui/src/ofxSliderGroup.cpp; sourceTree = SOURCE_ROOT; };
 		80CD68E0DDF2C60D2715CC78 /* stb_vorbis.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.c; fileEncoding = 30; name = stb_vorbis.c; path = ../../../addons/ofxMaxim/libs/stb_vorbis.c; sourceTree = SOURCE_ROOT; };
@@ -1101,6 +1104,8 @@
 				7D28C2611A3F409900BCC3C7 /* BypassButton.h */,
 				7D3AA5061A403B6F00C88385 /* DelayPedal.cpp */,
 				7D3AA5071A403B6F00C88385 /* DelayPedal.h */,
+				7DAAA3671A40902F00FAD9BA /* InputOutput.cpp */,
+				7DAAA3681A40902F00FAD9BA /* InputOutput.h */,
 			);
 			path = src;
 			sourceTree = SOURCE_ROOT;
@@ -1262,6 +1267,7 @@
 				7DAAA3311A4058B400FAD9BA /* ofxUIEventArgs.cpp in Sources */,
 				7DAAA3381A4058B400FAD9BA /* ofxUIImageToggle.cpp in Sources */,
 				7DAAA3451A4058B400FAD9BA /* ofxUIScrollableCanvas.cpp in Sources */,
+				7DAAA3691A40902F00FAD9BA /* InputOutput.cpp in Sources */,
 				7DAAA3501A4058B400FAD9BA /* ofxUIValuePlotter.cpp in Sources */,
 				169D3C72FDE6C5590A1616F5 /* ofxCvFloatImage.cpp in Sources */,
 				7DAAA34B1A4058B400FAD9BA /* ofxUITabBar.cpp in Sources */,

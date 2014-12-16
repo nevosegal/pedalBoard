@@ -20,6 +20,8 @@ Pedal::Pedal(double x, double y){
     ysize = 250;
     bypass_btn = *new BypassButton(x+(xsize/2),y+(2*ysize/3));
     engaged = false;
+    input = *new InputOutput("Input");
+    output = *new InputOutput("Output");
 }
 
 void Pedal::setup(){
@@ -33,7 +35,8 @@ void Pedal::draw(){
     ofSetHexColor(0xffffff);
     ofRectRounded(x,y,xsize, ysize, 8);
     bypass_btn.draw();
-    
+    input.draw(x,y+ysize/2);
+    output.draw(x+xsize,y+ysize/2);
 }
 
 BypassButton& Pedal::getBypassButton(){
@@ -64,3 +67,23 @@ bool Pedal::isInBounds(int x, int y){
 bool Pedal::isEngaged(){
     return engaged;
 }
+
+InputOutput& Pedal::getInput(){
+    return input;
+}
+
+InputOutput& Pedal::getOutput(){
+    return output;
+}
+
+void Pedal::setInput(InputOutput in){
+    input = in;
+}
+
+void Pedal::setOutput(InputOutput out){
+    output = out;
+}
+
+
+
+

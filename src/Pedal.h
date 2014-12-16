@@ -12,7 +12,7 @@
 #include <stdio.h>
 #include "ofMain.h"
 #include "BypassButton.h"
-#include "ofxUI.h"
+#include "InputOutput.h"
 
 class Pedal{
     
@@ -23,7 +23,6 @@ public:
     Pedal(double x, double y);
     
     //methods
-//    void toggleBypass();
     void setup();
     void update();
     void draw();
@@ -32,11 +31,17 @@ public:
     virtual float* effect(float* input);
     bool isInBounds(int x, int y);
     bool isEngaged();
+    InputOutput& getInput();
+    InputOutput& getOutput();
+    void setInput(InputOutput in);
+    void setOutput(InputOutput out);
     
-    //variables
+    //members
     double x, y, xsize, ysize;
     BypassButton bypass_btn;
     bool engaged;
+    InputOutput input;
+    InputOutput output;
 
 };
 

@@ -4,7 +4,7 @@
 #include "ofxMaxim.h"
 #include "Pedal.h"
 #include "DelayPedal.h"
-#include "ofxUI.h"
+#include "InputOutput.h"
 #include <vector>
 
 
@@ -35,9 +35,9 @@ public:
     double prevx, prevy;
     int numPedals;
     std::vector<Pedal> pedals;
-    bool engaged;
-    
     float *myInput;
+    double startX, startY, targetX, targetY;
+    bool drawLine = false;
     
     
 };
