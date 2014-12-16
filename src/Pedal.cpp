@@ -16,9 +16,10 @@ Pedal::Pedal(){
 Pedal::Pedal(double x, double y){
     this->x = x;
     this->y = y;
-    xsize = 120;
-    ysize = 200;
+    xsize = 150;
+    ysize = 250;
     bypass_btn = *new BypassButton(x+(xsize/2),y+(2*ysize/3));
+    engaged = false;
 }
 
 void Pedal::setup(){
@@ -49,4 +50,17 @@ void Pedal::move(double x, double y){
 float* Pedal::effect(float* input){
     cout<<"this is inside Pedal"<<endl;
     return input;
+}
+
+bool Pedal::isInBounds(int x, int y){
+    if(x > this->x && x < (this->x + xsize) && y > this->y && y < (this->y + ysize)){
+        engaged = true;
+        return true;
+    }
+    engaged = false;
+    return false;
+}
+
+bool Pedal::isEngaged(){
+    return engaged;
 }

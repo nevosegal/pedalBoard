@@ -30,6 +30,8 @@ public:
     BypassButton& getBypassButton();
     void move(double x, double y);
     virtual float* effect(float* input);
+    bool isInBounds(int x, int y);
+    bool isEngaged();
     
     //variables
     double x, y, xsize, ysize;

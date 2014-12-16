@@ -50,3 +50,11 @@ double BypassButton::getX(){
 double BypassButton::getY(){
     return this->y;
 }
+
+bool BypassButton::isInBounds(int x, int y){
+    if(x > (this->x - this->radius) && x < (this->x + this->radius)&&
+       y > (this->y - this->radius) && y < (this->y + this->radius)){
+        return true;
+    }
+    return false;
+}

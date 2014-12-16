@@ -25,6 +25,7 @@ public:
     double getX();
     double getY();
     void toggle();
+    bool isInBounds(int x, int y);
     
     bool bypassed;
     double x, y, radius;

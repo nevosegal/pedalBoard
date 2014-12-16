@@ -71,11 +71,10 @@ void ofApp::mouseMoved(int x, int y ){
 //--------------------------------------------------------------
 void ofApp::mouseDragged(int x, int y, int button){
     for(int i = 0; i < numPedals; i++){
-        Pedal& p = pedals.at(i);
-        if(x > p.x && x < (p.x + p.xsize) && y > p.y && y < (p.y + p.ysize)){
+        if(pedals.at(i).isEngaged() && pedals.at(i).isInBounds(x, y)){
             double deltax = x-prevx;
             double deltay = y-prevy;
-            p.move(deltax, deltay);
+            pedals.at(i).move(deltax, deltay);
             prevx = x;
             prevy = y;
         }
@@ -85,8 +84,7 @@ void ofApp::mouseDragged(int x, int y, int button){
 //--------------------------------------------------------------
 void ofApp::mousePressed(int x, int y, int button){
     for(int i = 0; i < numPedals; i++){
-        Pedal& p = pedals.at(i);
-        if(x > p.x && x < (p.x + p.xsize) && y > p.y && y < (p.y + p.ysize)){
+        if(pedals.at(i).isInBounds(x, y)){
             prevx = x;
             prevy = y;
        }
@@ -97,9 +95,10 @@ void ofApp::mousePressed(int x, int y, int button){
 void ofApp::mouseReleased(int x, int y, int button){
     for(int i = 0; i < numPedals; i++){
         BypassButton & bb = pedals.at(i).getBypassButton();
-        if(x > (bb.x - bb.radius) && x < (bb.x + bb.radius) && y > (bb.y - bb.radius) && y < (bb.y + bb.radius)){
+        if(bb.isInBounds(x, y)){
             bb.toggle();
         }
+        pedals.at(i).engaged = false;
     }
 }
 
@@ -119,9 +118,5 @@ void ofApp::dragEvent(ofDragInfo dragInfo){
     
 }
 void ofApp::exit(){
-    
-    for(int i = 0; i < numPedals; i++){
-        pedals.at(i).exit();
-    }
     ofSoundStreamClose();
 }

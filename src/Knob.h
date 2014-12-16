@@ -10,5 +10,6 @@
 #define __pedalBoard__Knob__
 
 #include <stdio.h>
+#include "ofMain.h"
 
 #endif /* defined(__pedalBoard__Knob__) */
