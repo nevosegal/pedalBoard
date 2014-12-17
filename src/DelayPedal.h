@@ -16,7 +16,7 @@
 
 class DelayPedal: public Pedal{
 public:
-    DelayPedal(double x, double y);
+    DelayPedal(double x, double y, int id);
     
 };
 

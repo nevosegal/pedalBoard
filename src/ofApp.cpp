@@ -20,7 +20,7 @@ void ofApp::setup(){
     myInput = new float[initialBufferSize];
     numPedals = 4;
     for(int i = 0 ; i < numPedals; i++){
-        pedals.push_back(*new Pedal(50 + i*200, 70));
+        pedals.push_back(*new Pedal(50 + i*200, 70,i));
     }
     ofSoundStreamSetup(1,1,this, sampleRate, initialBufferSize, 4);/* Call this last ! */
 }
@@ -34,13 +34,22 @@ void ofApp::update(){
 void ofApp::draw(){
     for (int i = 0; i < numPedals; i++) {
         pedals.at(i).draw();
-        cout << pedals.at(i).getInput().isConnected() <<endl;
+//        cout << pedals.at(i).getInput().isConnected() <<endl;
     }
 
     if(drawLine){
         ofLine(startX, startY, targetX, targetY);
     }
     
+    for(int i = 0; i < numPedals ; i++){
+//        for(int j = 0; j < numPedals; j++){
+//            Pedal start = pedals.at(i);
+//            Pedal end = pedals.at(j);
+            if(pedals.at(i).getInput().isConnected()){
+                ofLine(pedals.at(i).getInput().getConnection().getOutput().getX(), pedals.at(i).getInput().getConnection().getOutput().getY(), pedals.at(i).getInput().getX(), pedals.at(i).getInput().getY());
+            }
+//        }
+    }
 }
 
 //--------------------------------------------------------------
@@ -102,13 +111,13 @@ void ofApp::mousePressed(int x, int y, int button){
             prevx = x;
             prevy = y;
         }
-        else if(pedals.at(i).getOutput().isInBounds(x,y)){
-            drawLine = true;
+        else if(!pedals.at(i).getOutput().isConnected() && pedals.at(i).getOutput().isInBounds(x,y)){
+            tempPedal = pedals.at(i);
             startX = x;
             startY = y;
             targetX = x;
             targetY = y;
-            tempPedal = pedals.at(i);
+            drawLine = true;
         }
     }
 }
@@ -122,6 +131,7 @@ void ofApp::mouseReleased(int x, int y, int button){
         }
         else if (drawLine && pedals.at(i).getInput().isInBounds(x, y)){
             pedals.at(i).getInput().setConnection(tempPedal);
+//            pedals.at(tempPedal.getId()).setOutput(pedals.at(i).getInput());
         }
         pedals.at(i).engaged = false;
     }

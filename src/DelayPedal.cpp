@@ -8,8 +8,8 @@
 
 #include "DelayPedal.h"
 
-DelayPedal::DelayPedal(double x, double y)
-:Pedal(x, y){
+DelayPedal::DelayPedal(double x, double y, int id)
+:Pedal(x, y, id){
     
 }
 

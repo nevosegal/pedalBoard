@@ -11,15 +11,21 @@
 InputOutput::InputOutput(){
 }
 
-InputOutput::InputOutput(string type){
+InputOutput::InputOutput(string type,double x, double y){
     connected = false;
     this->type = type;
+    this->x = x;
+    this->y = y;
     radius = 6;
 }
 
 void InputOutput::setConnection(Pedal& pedal){
     pedalConnected = &pedal;
     connected = true;
+}
+
+Pedal& InputOutput::getConnection(){
+    return *pedalConnected;
 }
 
 void InputOutput::disconnect(){
@@ -30,9 +36,7 @@ bool InputOutput::isConnected(){
     return connected;
 }
 
-void InputOutput::draw(double x, double y){
-    this->x = x;
-    this->y = y;
+void InputOutput::draw(){
     ofSetHexColor(0xaaaaaa);
     ofCircle(x, y, radius);
 }
@@ -43,4 +47,13 @@ bool InputOutput::isInBounds(int x, int y){
     }
     return false;
 }
+
+double InputOutput::getX(){
+    return x;
+}
+
+double InputOutput::getY(){
+    return y;
+}
+
 

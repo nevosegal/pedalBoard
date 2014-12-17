@@ -11,17 +11,19 @@
 
 Pedal::Pedal(){
     //TBD
+    id = 100;
 }
 
-Pedal::Pedal(double x, double y){
+Pedal::Pedal(double x, double y, int id){
     this->x = x;
     this->y = y;
     xsize = 150;
     ysize = 250;
     bypass_btn = *new BypassButton(x+(xsize/2),y+(2*ysize/3));
     engaged = false;
-    input = *new InputOutput("Input");
-    output = *new InputOutput("Output");
+    input = *new InputOutput("Input",x,y+ysize/2);
+    output = *new InputOutput("Output",x+xsize,y+ysize/2);
+    this->id = id;
 }
 
 void Pedal::setup(){
@@ -35,8 +37,8 @@ void Pedal::draw(){
     ofSetHexColor(0xffffff);
     ofRectRounded(x,y,xsize, ysize, 8);
     bypass_btn.draw();
-    input.draw(x,y+ysize/2);
-    output.draw(x+xsize,y+ysize/2);
+    input.draw();
+    output.draw();
 }
 
 BypassButton& Pedal::getBypassButton(){
@@ -48,6 +50,10 @@ void Pedal::move(double x, double y){
     this->y += y;
     bypass_btn.x = this->x + (xsize/2);
     bypass_btn.y = this->y + (2*ysize/3);
+    input.x += x;
+    input.y += y;
+    output.x += x;
+    output.y += y;
 }
 
 float* Pedal::effect(float* input){
@@ -82,6 +88,10 @@ void Pedal::setInput(InputOutput in){
 
 void Pedal::setOutput(InputOutput out){
     output = out;
+}
+
+int Pedal::getId(){
+    return id;
 }
 
 

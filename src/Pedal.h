@@ -20,7 +20,7 @@ public:
     
     //constructor
     Pedal();
-    Pedal(double x, double y);
+    Pedal(double x, double y, int id);
     
     //methods
     void setup();
@@ -35,6 +35,7 @@ public:
     InputOutput& getOutput();
     void setInput(InputOutput in);
     void setOutput(InputOutput out);
+    int getId();
     
     //members
     double x, y, xsize, ysize;
@@ -42,6 +43,7 @@ public:
     bool engaged;
     InputOutput input;
     InputOutput output;
+    int id;
 
 };
 

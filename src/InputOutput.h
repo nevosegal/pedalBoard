@@ -18,13 +18,16 @@ class Pedal;
 class InputOutput{
 public:
     InputOutput();
-    InputOutput(string type);
+    InputOutput(string type,double x, double y);
     
     void setConnection(Pedal& p);
     void disconnect();
     bool isConnected();
-    void draw(double x, double y);
+    void draw();
     bool isInBounds(int x, int y);
+    Pedal& getConnection();
+    double getX();
+    double getY();
     
     bool connected;
     string type;
