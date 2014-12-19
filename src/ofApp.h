@@ -38,6 +38,6 @@ public:
     float *myInput;
     double startX, startY, targetX, targetY;
     bool drawLine = false;
-    
+    int cableHoverColor;
     
 };

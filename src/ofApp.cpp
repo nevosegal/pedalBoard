@@ -22,6 +22,7 @@ void ofApp::setup(){
     for(int i = 0 ; i < numPedals; i++){
         pedals.push_back(*new Pedal(50 + i*200, 70,i));
     }
+    cableHoverColor = 150;
     ofSoundStreamSetup(1,1,this, sampleRate, initialBufferSize, 4);/* Call this last ! */
 }
 
@@ -34,21 +35,18 @@ void ofApp::update(){
 void ofApp::draw(){
     for (int i = 0; i < numPedals; i++) {
         pedals.at(i).draw();
-//        cout << pedals.at(i).getInput().isConnected() <<endl;
+        cout << pedals.at(i).getInput().isConnected() <<endl;
     }
 
     if(drawLine){
         ofLine(startX, startY, targetX, targetY);
     }
     
+    ofSetColor(cableHoverColor);
     for(int i = 0; i < numPedals ; i++){
-//        for(int j = 0; j < numPedals; j++){
-//            Pedal start = pedals.at(i);
-//            Pedal end = pedals.at(j);
-            if(pedals.at(i).getInput().isConnected()){
-                ofLine(pedals.at(i).getInput().getConnection().getOutput().getX(), pedals.at(i).getInput().getConnection().getOutput().getY(), pedals.at(i).getInput().getX(), pedals.at(i).getInput().getY());
-            }
-//        }
+        if(pedals.at(i).getInput().isConnected()){
+            ofLine(pedals.at(i).getInput().getConnection().getOutput().getX(), pedals.at(i).getInput().getConnection().getOutput().getY(), pedals.at(i).getInput().getX(), pedals.at(i).getInput().getY());
+        }
     }
 }
 
@@ -83,6 +81,10 @@ void ofApp::mouseMoved(int x, int y ){
         if(pedals.at(i).isInBounds(x, y)){
             //TBD: act when hovered
         }
+//      if(pedals.at(i).getInput().isConnected()){
+            //TBD handle hovering over cable;
+//                if((pedals.at(i).getInput().getConnection().getOutput().getX(), pedals.at(i).getInput().getConnection().getOutput().getY(), pedals.at(i).getInput().getX(), pedals.at(i).getInput().getY()));
+//        }
     }
 }
 
@@ -103,7 +105,7 @@ void ofApp::mouseDragged(int x, int y, int button){
     }
 }
 
-Pedal tempPedal;
+int tempPedal;
 //--------------------------------------------------------------
 void ofApp::mousePressed(int x, int y, int button){
     for(int i = 0; i < numPedals; i++){
@@ -112,7 +114,7 @@ void ofApp::mousePressed(int x, int y, int button){
             prevy = y;
         }
         else if(!pedals.at(i).getOutput().isConnected() && pedals.at(i).getOutput().isInBounds(x,y)){
-            tempPedal = pedals.at(i);
+            tempPedal = i;
             startX = x;
             startY = y;
             targetX = x;
@@ -129,9 +131,9 @@ void ofApp::mouseReleased(int x, int y, int button){
         if(bb.isInBounds(x, y)){
             bb.toggle();
         }
-        else if (drawLine && pedals.at(i).getInput().isInBounds(x, y)){
-            pedals.at(i).getInput().setConnection(tempPedal);
-//            pedals.at(tempPedal.getId()).setOutput(pedals.at(i).getInput());
+        else if (!pedals.at(i).getInput().isConnected() && drawLine && pedals.at(i).getInput().isInBounds(x, y)){
+            pedals.at(i).getInput().setConnection(pedals.at(tempPedal));
+            pedals.at(tempPedal).getOutput().setConnection(pedals.at(i));
         }
         pedals.at(i).engaged = false;
     }
