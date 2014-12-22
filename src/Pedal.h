@@ -28,7 +28,7 @@ public:
     void draw();
     BypassButton& getBypassButton();
     void move(double x, double y);
-    virtual float* effect(float* input);
+    float* effect(float* input, int bufferSize);
     bool isInBounds(int x, int y);
     bool isEngaged();
     InputOutput& getInput();

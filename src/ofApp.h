@@ -26,6 +26,7 @@ public:
     void dragEvent(ofDragInfo dragInfo);
     void gotMessage(ofMessage msg);
     void exit();
+    void drawInOut();
     
     void audioRequested 	(float * input, int bufferSize, int nChannels); /* output method */
     void audioReceived 	(float * input, int bufferSize, int nChannels); /* input method */
@@ -39,5 +40,6 @@ public:
     double startX, startY, targetX, targetY;
     bool drawLine = false;
     int cableHoverColor;
+    InputOutput audioIn, audioOut;
     
 };

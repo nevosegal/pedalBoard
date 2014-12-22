@@ -19,13 +19,13 @@ InputOutput::InputOutput(string type,double x, double y){
     radius = 6;
 }
 
-void InputOutput::setConnection(Pedal& pedal){
-    pedalConnected = &pedal;
+void InputOutput::setConnection(InputOutput& inOut){
+    inputOutput = &inOut;
     connected = true;
 }
 
-Pedal& InputOutput::getConnection(){
-    return *pedalConnected;
+InputOutput& InputOutput::getConnection(){
+    return *inputOutput;
 }
 
 void InputOutput::disconnect(){

@@ -1,7 +1,6 @@
 #include "ofApp.h"
 
 
-
 //-------------------------------------------------------------
 ofApp::~ofApp() {
 
@@ -23,6 +22,8 @@ void ofApp::setup(){
         pedals.push_back(*new Pedal(50 + i*200, 70,i));
     }
     cableHoverColor = 150;
+    audioIn = *new InputOutput("input", 0, (double)ofGetHeight()/2);
+    audioOut = *new InputOutput("output", ofGetWidth(), (double)ofGetHeight()/2);
     ofSoundStreamSetup(1,1,this, sampleRate, initialBufferSize, 4);/* Call this last ! */
 }
 
@@ -45,13 +46,17 @@ void ofApp::draw(){
     ofSetColor(cableHoverColor);
     for(int i = 0; i < numPedals ; i++){
         if(pedals.at(i).getInput().isConnected()){
-            ofLine(pedals.at(i).getInput().getConnection().getOutput().getX(), pedals.at(i).getInput().getConnection().getOutput().getY(), pedals.at(i).getInput().getX(), pedals.at(i).getInput().getY());
+            ofLine(pedals.at(i).getInput().getConnection().getX(), pedals.at(i).getInput().getConnection().getY(), pedals.at(i).getInput().getX(), pedals.at(i).getInput().getY());
         }
     }
+    audioIn.draw();
+    audioOut.draw();
 }
 
 //--------------------------------------------------------------
 void ofApp::audioRequested 	(float * output, int bufferSize, int nChannels){
+
+    myInput = pedals.at(0).effect(myInput, bufferSize);
 
     for (int i = 0; i < bufferSize; i++){
         output[i] = myInput[i];
@@ -113,8 +118,15 @@ void ofApp::mousePressed(int x, int y, int button){
             prevx = x;
             prevy = y;
         }
-        else if(!pedals.at(i).getOutput().isConnected() && pedals.at(i).getOutput().isInBounds(x,y)){
+        else if(pedals.at(i).getOutput().isInBounds(x,y) && !pedals.at(i).getOutput().isConnected()){
             tempPedal = i;
+            startX = x;
+            startY = y;
+            targetX = x;
+            targetY = y;
+            drawLine = true;
+        }
+        else if(audioIn.isInBounds(x, y)){
             startX = x;
             startY = y;
             targetX = x;
@@ -132,8 +144,11 @@ void ofApp::mouseReleased(int x, int y, int button){
             bb.toggle();
         }
         else if (!pedals.at(i).getInput().isConnected() && drawLine && pedals.at(i).getInput().isInBounds(x, y)){
-            pedals.at(i).getInput().setConnection(pedals.at(tempPedal));
-            pedals.at(tempPedal).getOutput().setConnection(pedals.at(i));
+            pedals.at(i).getInput().setConnection(pedals.at(tempPedal).getOutput());
+            pedals.at(tempPedal).getOutput().setConnection(pedals.at(i).getInput());
+        }
+        else if (!audioIn.isConnected() && drawLine && pedals.at(i).getInput().isInBounds(x, y)){
+            pedals.at(i).getInput().setConnection(audioIn);
         }
         pedals.at(i).engaged = false;
     }
@@ -155,6 +170,12 @@ void ofApp::gotMessage(ofMessage msg){
 void ofApp::dragEvent(ofDragInfo dragInfo){
     
 }
+
 void ofApp::exit(){
     ofSoundStreamClose();
+}
+
+void ofApp::drawInOut(){
+    int h = ofGetHeight();
+    int w  = ofGetWidth();
 }

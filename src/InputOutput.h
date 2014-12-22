@@ -20,18 +20,18 @@ public:
     InputOutput();
     InputOutput(string type,double x, double y);
     
-    void setConnection(Pedal& p);
     void disconnect();
     bool isConnected();
     void draw();
     bool isInBounds(int x, int y);
-    Pedal& getConnection();
+    InputOutput& getConnection();
     double getX();
     double getY();
-    
+    void setConnection(InputOutput &inOut);
     bool connected;
     string type;
-    Pedal *pedalConnected;
+    InputOutput *inputOutput;
+
     double x,y;
     int radius;
 };

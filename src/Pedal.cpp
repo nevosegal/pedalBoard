@@ -56,8 +56,13 @@ void Pedal::move(double x, double y){
     output.y += y;
 }
 
-float* Pedal::effect(float* input){
-    cout<<"this is inside Pedal"<<endl;
+float* Pedal::effect(float* input, int bufferSize){
+    
+    if(!bypass_btn.bypassed){
+        for (int i = 0; i< bufferSize; i++) {
+            input[i] /= 2;
+        }
+    }
     return input;
 }
 
