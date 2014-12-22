@@ -36,8 +36,8 @@ void ofApp::update(){
 void ofApp::draw(){
     for (int i = 0; i < numPedals; i++) {
         pedals.at(i).draw();
-        cout << pedals.at(i).getInput().isConnected() <<endl;
     }
+//    cout << audioOut.isConnected() << endl;
 
     if(drawLine){
         ofLine(startX, startY, targetX, targetY);
@@ -47,6 +47,10 @@ void ofApp::draw(){
     for(int i = 0; i < numPedals ; i++){
         if(pedals.at(i).getInput().isConnected()){
             ofLine(pedals.at(i).getInput().getConnection().getX(), pedals.at(i).getInput().getConnection().getY(), pedals.at(i).getInput().getX(), pedals.at(i).getInput().getY());
+        }
+        if(audioOut.isConnected()){
+            cout << "lendl" <<endl;
+            ofLine(audioOut.getConnection().getX(), audioOut.getConnection().getY(), audioOut.getX(), audioOut.getY());
         }
     }
     audioIn.draw();
@@ -86,10 +90,6 @@ void ofApp::mouseMoved(int x, int y ){
         if(pedals.at(i).isInBounds(x, y)){
             //TBD: act when hovered
         }
-//      if(pedals.at(i).getInput().isConnected()){
-            //TBD handle hovering over cable;
-//                if((pedals.at(i).getInput().getConnection().getOutput().getX(), pedals.at(i).getInput().getConnection().getOutput().getY(), pedals.at(i).getInput().getX(), pedals.at(i).getInput().getY()));
-//        }
     }
 }
 
@@ -127,6 +127,7 @@ void ofApp::mousePressed(int x, int y, int button){
             drawLine = true;
         }
         else if(audioIn.isInBounds(x, y)){
+            tempPedal = 100;
             startX = x;
             startY = y;
             targetX = x;
@@ -143,15 +144,24 @@ void ofApp::mouseReleased(int x, int y, int button){
         if(bb.isInBounds(x, y)){
             bb.toggle();
         }
-        else if (!pedals.at(i).getInput().isConnected() && drawLine && pedals.at(i).getInput().isInBounds(x, y)){
-            pedals.at(i).getInput().setConnection(pedals.at(tempPedal).getOutput());
-            pedals.at(tempPedal).getOutput().setConnection(pedals.at(i).getInput());
+        else if (tempPedal != 100 && !pedals.at(i).getInput().isConnected() && drawLine){
+            if(pedals.at(i).getInput().isInBounds(x, y)){
+                pedals.at(i).getInput().setConnection(pedals.at(tempPedal).getOutput());
+                pedals.at(tempPedal).getOutput().setConnection(pedals.at(i).getInput());
+            }
+            else if(audioOut.isInBounds(x, y) && !audioOut.isConnected()){
+                audioOut.setConnection(pedals.at(tempPedal).getOutput());
+                pedals.at(tempPedal).getOutput().setConnection(audioOut);
+            }
         }
-        else if (!audioIn.isConnected() && drawLine && pedals.at(i).getInput().isInBounds(x, y)){
+        else if (tempPedal == 100 && !audioIn.isConnected() && drawLine && pedals.at(i).getInput().isInBounds(x, y)){
+//            cout<<"ueueue"<<endl;
             pedals.at(i).getInput().setConnection(audioIn);
+            audioIn.setConnection(pedals.at(i).getInput());
         }
         pedals.at(i).engaged = false;
     }
+    tempPedal == 100;
     drawLine = false;
 }
 
