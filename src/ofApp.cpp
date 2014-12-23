@@ -56,22 +56,23 @@ void ofApp::draw(){
 }
 
 //--------------------------------------------------------------
+//bool chainFound = false;
+int pedalToInput = 0;
 void ofApp::audioRequested 	(float * output, int bufferSize, int nChannels){
     
-    if(audioIn.isConnected()){
-        for(int i = 0 ; i < numPedals; i++) {
-            if(&pedals.at(i).getInput() == &audioIn.getConnection()){
-                
+//    while(!chainFound){
+        if(audioIn.isConnected()){
+            for(int i = 0 ; i < numPedals; i++) {
+                if(&pedals.at(i).getInput() == &audioIn.getConnection()){
+                    myInput = pedals.at(i).effect(myInput, bufferSize);
+                }
             }
         }
+//    }
+
+    for (int i = 0; i < bufferSize; i++){
+        output[i] = myInput[i];
     }
-    
-    for(int j = 0; j < numPedals; j++){
-//        if(pedals.at(j).getInput().isConnected())
-    }
-//        for (int i = 0; i < bufferSize; i++){
-//            output[i] = myInput[i];
-//        }
 
     
 }
