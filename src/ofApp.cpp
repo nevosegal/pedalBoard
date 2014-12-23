@@ -37,7 +37,6 @@ void ofApp::draw(){
     for (int i = 0; i < numPedals; i++) {
         pedals.at(i).draw();
     }
-//    cout << audioOut.isConnected() << endl;
 
     if(drawLine){
         ofLine(startX, startY, targetX, targetY);
@@ -49,7 +48,6 @@ void ofApp::draw(){
             ofLine(pedals.at(i).getInput().getConnection().getX(), pedals.at(i).getInput().getConnection().getY(), pedals.at(i).getInput().getX(), pedals.at(i).getInput().getY());
         }
         if(audioOut.isConnected()){
-            cout << "lendl" <<endl;
             ofLine(audioOut.getConnection().getX(), audioOut.getConnection().getY(), audioOut.getX(), audioOut.getY());
         }
     }
@@ -59,12 +57,22 @@ void ofApp::draw(){
 
 //--------------------------------------------------------------
 void ofApp::audioRequested 	(float * output, int bufferSize, int nChannels){
-
-    myInput = pedals.at(0).effect(myInput, bufferSize);
-
-    for (int i = 0; i < bufferSize; i++){
-        output[i] = myInput[i];
+    
+    if(audioIn.isConnected()){
+        for(int i = 0 ; i < numPedals; i++) {
+            if(&pedals.at(i).getInput() == &audioIn.getConnection()){
+                
+            }
+        }
     }
+    
+    for(int j = 0; j < numPedals; j++){
+//        if(pedals.at(j).getInput().isConnected())
+    }
+//        for (int i = 0; i < bufferSize; i++){
+//            output[i] = myInput[i];
+//        }
+
     
 }
 //--------------------------------------------------------------
@@ -155,7 +163,6 @@ void ofApp::mouseReleased(int x, int y, int button){
             }
         }
         else if (tempPedal == 100 && !audioIn.isConnected() && drawLine && pedals.at(i).getInput().isInBounds(x, y)){
-//            cout<<"ueueue"<<endl;
             pedals.at(i).getInput().setConnection(audioIn);
             audioIn.setConnection(pedals.at(i).getInput());
         }
