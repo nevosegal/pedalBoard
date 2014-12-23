@@ -56,22 +56,49 @@ void ofApp::draw(){
 }
 
 //--------------------------------------------------------------
-//bool chainFound = false;
-int pedalToInput = 0;
+bool chainFound = false;
+int lastPedal = 0;
+int counter = 0;
 void ofApp::audioRequested 	(float * output, int bufferSize, int nChannels){
-    
-//    while(!chainFound){
-        if(audioIn.isConnected()){
-            for(int i = 0 ; i < numPedals; i++) {
-                if(&pedals.at(i).getInput() == &audioIn.getConnection()){
-                    myInput = pedals.at(i).effect(myInput, bufferSize);
-                }
+    chainFound = false;
+
+    cout << "Before:";
+    cout << myInput[0] << endl;
+    if(audioIn.isConnected()){
+        for(int i = 0 ; i < numPedals; i++) {
+            if(&pedals.at(i).getInput() == &audioIn.getConnection()){
+                lastPedal = i;
+                myInput = pedals.at(i).effect(myInput, bufferSize);
             }
         }
-//    }
-
-    for (int i = 0; i < bufferSize; i++){
-        output[i] = myInput[i];
+    }
+    
+    while(!chainFound){
+        for(int i = 0; i < numPedals; i++){
+            if(&pedals.at(i).getInput().getConnection() == &pedals.at(lastPedal).getOutput()){
+                myInput = pedals.at(i).effect(myInput, bufferSize);
+                lastPedal = i;
+                break;
+            }
+        }
+        if(counter > 100){
+            chainFound = true;
+        }
+        counter++;
+    }
+    
+    cout << "After:";
+    cout << myInput[0] << endl;
+    
+    if(audioOut.isConnected() && &pedals.at(lastPedal).getOutput().getConnection() == &audioOut){
+        for (int i = 0; i < bufferSize; i++){
+            output[i] = myInput[i];
+        }
+    }
+    else{
+        for (int i = 0; i < bufferSize; i++){
+            output[i] = 0;
+        }
     }
 
     
