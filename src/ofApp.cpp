@@ -69,6 +69,7 @@ void ofApp::audioRequested 	(float * output, int bufferSize, int nChannels){
             if(&pedals.at(i).getInput() == &audioIn.getConnection()){
                 lastPedal = i;
                 myInput = pedals.at(i).effect(myInput, bufferSize);
+                break;
             }
         }
     }
@@ -78,10 +79,10 @@ void ofApp::audioRequested 	(float * output, int bufferSize, int nChannels){
             if(&pedals.at(i).getInput().getConnection() == &pedals.at(lastPedal).getOutput()){
                 myInput = pedals.at(i).effect(myInput, bufferSize);
                 lastPedal = i;
-                break;
             }
         }
-        if(counter > 100){
+        if(counter > 50){
+            counter = 0;
             chainFound = true;
         }
         counter++;
@@ -179,20 +180,25 @@ void ofApp::mouseReleased(int x, int y, int button){
         BypassButton & bb = pedals.at(i).getBypassButton();
         if(bb.isInBounds(x, y)){
             bb.toggle();
+            break;
         }
-        else if (tempPedal != 100 && !pedals.at(i).getInput().isConnected() && drawLine){
+        else if (tempPedal != 100 && (!pedals.at(i).getInput().isConnected() || !audioOut.isConnected()) && drawLine){
             if(pedals.at(i).getInput().isInBounds(x, y)){
+//                cout << i << endl;
                 pedals.at(i).getInput().setConnection(pedals.at(tempPedal).getOutput());
                 pedals.at(tempPedal).getOutput().setConnection(pedals.at(i).getInput());
+                break;
             }
-            else if(audioOut.isInBounds(x, y) && !audioOut.isConnected()){
+            else if(audioOut.isInBounds(x, y)){
                 audioOut.setConnection(pedals.at(tempPedal).getOutput());
                 pedals.at(tempPedal).getOutput().setConnection(audioOut);
+                break;
             }
         }
         else if (tempPedal == 100 && !audioIn.isConnected() && drawLine && pedals.at(i).getInput().isInBounds(x, y)){
             pedals.at(i).getInput().setConnection(audioIn);
             audioIn.setConnection(pedals.at(i).getInput());
+            break;
         }
         pedals.at(i).engaged = false;
     }
