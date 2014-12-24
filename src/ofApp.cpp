@@ -81,7 +81,6 @@ void ofApp::audioRequested 	(float * output, int bufferSize, int nChannels){
     while(!chainFound){
         for(int i = 0; i < numPedals; i++){
             if(&pedals.at(i)->getInput().getConnection() == &pedals.at(lastPedal)->getOutput()){
-                cout << pedals.at(i)->getId();
                 myInput = pedals.at(i)->effect(myInput, bufferSize);
                 lastPedal = i;
             }
@@ -92,7 +91,6 @@ void ofApp::audioRequested 	(float * output, int bufferSize, int nChannels){
         }
         counter++;
     }
-    
 //    cout << "After:";
 //    cout << myInput[0] << endl;
     
@@ -106,8 +104,8 @@ void ofApp::audioRequested 	(float * output, int bufferSize, int nChannels){
             output[i] = 0;
         }
     }
-
     
+
 }
 //--------------------------------------------------------------
 void ofApp::audioReceived (float * input, int bufferSize, int nChannels){

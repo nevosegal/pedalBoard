@@ -16,12 +16,15 @@ DelayPedal::DelayPedal(){
     
 }
 
-float* effect(float* input){
-    cout<<"this is inside delayPedal"<<endl;
+float* DelayPedal::effect(float* input, int bufferSize){
+    cout<< "this is a delay pedal!!" <<endl;
     return input;
 }
 
 void DelayPedal::draw(){
-    //Change the appearance of the pedal;
-    cout << "kjsnksf" <<endl;
+    ofSetHexColor(0x00ff00);
+    ofRectRounded(x,y,xsize, ysize, 8);
+    bypass_btn.draw();
+    input.draw();
+    output.draw();
 }

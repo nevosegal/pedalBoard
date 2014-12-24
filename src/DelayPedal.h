@@ -19,6 +19,7 @@ public:
     DelayPedal(double x, double y, int id);
     DelayPedal();
     void draw();
+    float* effect(float* input, int bufferSize);
 };
 
 

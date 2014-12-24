@@ -57,7 +57,6 @@ void Pedal::move(double x, double y){
 }
 
 float* Pedal::effect(float* input, int bufferSize){
-    
     if(!bypass_btn.bypassed){
         for (int i = 0; i< bufferSize; i++) {
             input[i] /= 2;
