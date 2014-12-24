@@ -25,10 +25,10 @@ public:
     //methods
     void setup();
     void update();
-    void draw();
+    virtual void draw();
     BypassButton& getBypassButton();
     void move(double x, double y);
-    float* effect(float* input, int bufferSize);
+    virtual float* effect(float* input, int bufferSize);
     bool isInBounds(int x, int y);
     bool isEngaged();
     InputOutput& getInput();

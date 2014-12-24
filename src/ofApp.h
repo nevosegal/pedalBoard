@@ -27,6 +27,7 @@ public:
     void gotMessage(ofMessage msg);
     void exit();
     void drawInOut();
+    DelayPedal dp;
     
     void audioRequested 	(float * input, int bufferSize, int nChannels); /* output method */
     void audioReceived 	(float * input, int bufferSize, int nChannels); /* input method */
@@ -35,7 +36,7 @@ public:
     int		sampleRate;
     double prevx, prevy;
     int numPedals;
-    std::vector<Pedal> pedals;
+    std::vector<Pedal*> pedals;
     float *myInput;
     double startX, startY, targetX, targetY;
     bool drawLine = false;
