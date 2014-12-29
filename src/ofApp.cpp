@@ -23,13 +23,13 @@ void ofApp::setup(){
     distortion = *new DistortionPedal(250,70,7);
     dp = *new DelayPedal(50,70,6);
     flanger = *new FlangerPedal(450,70,8);
+    chorus = *new ChorusPedal(650,70,9);
     
     pedals.push_back(&dp);
     pedals.push_back(&distortion);
     pedals.push_back(&flanger);
-    for(int i = 3 ; i < numPedals; i++){
-        pedals.push_back(new Pedal(50 + i*200, 70,i));
-    }
+    pedals.push_back(&chorus);
+
     cableHoverColor = 150;
     audioIn = *new InputOutput("input", 0, (double)ofGetHeight()/2);
     audioOut = *new InputOutput("output", ofGetWidth(), (double)ofGetHeight()/2);

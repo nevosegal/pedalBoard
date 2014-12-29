@@ -32,6 +32,7 @@
 		7D3AA5081A403B6F00C88385 /* DelayPedal.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7D3AA5061A403B6F00C88385 /* DelayPedal.cpp */; };
 		7DA0BB8B1A515B7A00FDC6F8 /* DistortionPedal.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7DA0BB891A515B7A00FDC6F8 /* DistortionPedal.cpp */; };
 		7DA0BB8E1A51647700FDC6F8 /* FlangerPedal.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7DA0BB8C1A51647700FDC6F8 /* FlangerPedal.cpp */; };
+		7DA0BB911A516DC100FDC6F8 /* ChorusPedal.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7DA0BB8F1A516DC100FDC6F8 /* ChorusPedal.cpp */; };
 		7DAAA3281A4058B400FAD9BA /* ofxUI2DGraph.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7DAAA2CB1A4058B400FAD9BA /* ofxUI2DGraph.cpp */; };
 		7DAAA3291A4058B400FAD9BA /* ofxUI2DPad.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7DAAA2CD1A4058B400FAD9BA /* ofxUI2DPad.cpp */; };
 		7DAAA32A1A4058B400FAD9BA /* ofxUIBaseDraws.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7DAAA2CF1A4058B400FAD9BA /* ofxUIBaseDraws.cpp */; };
@@ -225,6 +226,8 @@
 		7DA0BB8A1A515B7A00FDC6F8 /* DistortionPedal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DistortionPedal.h; sourceTree = "<group>"; };
 		7DA0BB8C1A51647700FDC6F8 /* FlangerPedal.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FlangerPedal.cpp; sourceTree = "<group>"; };
 		7DA0BB8D1A51647700FDC6F8 /* FlangerPedal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlangerPedal.h; sourceTree = "<group>"; };
+		7DA0BB8F1A516DC100FDC6F8 /* ChorusPedal.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ChorusPedal.cpp; sourceTree = "<group>"; };
+		7DA0BB901A516DC100FDC6F8 /* ChorusPedal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChorusPedal.h; sourceTree = "<group>"; };
 		7DAAA2CA1A4058B400FAD9BA /* ofxUI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxUI.h; sourceTree = "<group>"; };
 		7DAAA2CB1A4058B400FAD9BA /* ofxUI2DGraph.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ofxUI2DGraph.cpp; sourceTree = "<group>"; };
 		7DAAA2CC1A4058B400FAD9BA /* ofxUI2DGraph.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxUI2DGraph.h; sourceTree = "<group>"; };
@@ -1116,6 +1119,8 @@
 				7DA0BB8A1A515B7A00FDC6F8 /* DistortionPedal.h */,
 				7DA0BB8C1A51647700FDC6F8 /* FlangerPedal.cpp */,
 				7DA0BB8D1A51647700FDC6F8 /* FlangerPedal.h */,
+				7DA0BB8F1A516DC100FDC6F8 /* ChorusPedal.cpp */,
+				7DA0BB901A516DC100FDC6F8 /* ChorusPedal.h */,
 			);
 			path = src;
 			sourceTree = SOURCE_ROOT;
@@ -1311,6 +1316,7 @@
 				7DAAA3291A4058B400FAD9BA /* ofxUI2DPad.cpp in Sources */,
 				8F5205AEF8861EF234F0651A /* ofxOscSender.cpp in Sources */,
 				ADE367465D2A8EBAD4C7A8D9 /* IpEndpointName.cpp in Sources */,
+				7DA0BB911A516DC100FDC6F8 /* ChorusPedal.cpp in Sources */,
 				7DAAA3461A4058B400FAD9BA /* ofxUISlider.cpp in Sources */,
 				67FE4C7B15C2F0478C8126C2 /* NetworkingUtils.cpp in Sources */,
 				7DAAA32D1A4058B400FAD9BA /* ofxUICanvas.cpp in Sources */,

@@ -5,6 +5,7 @@
 #include "Pedal.h"
 #include "DelayPedal.h"
 #include "DistortionPedal.h"
+#include "ChorusPedal.h"
 #include "FlangerPedal.h"
 #include "InputOutput.h"
 #include <vector>
@@ -40,6 +41,7 @@ public:
     DelayPedal dp;
     DistortionPedal distortion;
     FlangerPedal flanger;
+    ChorusPedal chorus;
     float *myInput;
     double startX, startY, targetX, targetY;
     bool drawLine = false;
