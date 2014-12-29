@@ -20,9 +20,11 @@ void ofApp::setup(){
     myInput = new float[initialBufferSize];
     numPedals = 4;
     
-    dp = *new DelayPedal(100,100,6);
+    distortion = *new DistortionPedal(250,70,7);
+    dp = *new DelayPedal(50,70,6);
     pedals.push_back(&dp);
-    for(int i = 1 ; i < numPedals; i++){
+    pedals.push_back(&distortion);
+    for(int i = 2 ; i < numPedals; i++){
         pedals.push_back(new Pedal(50 + i*200, 70,i));
     }
     cableHoverColor = 150;
@@ -33,7 +35,6 @@ void ofApp::setup(){
 
 //--------------------------------------------------------------
 void ofApp::update(){
-    
 }
 
 //--------------------------------------------------------------

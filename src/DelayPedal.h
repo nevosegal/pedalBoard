@@ -12,6 +12,7 @@
 #include <stdio.h>
 #include "ofMain.h"
 #include "Pedal.h"
+#include "ofxMaxim.h"
 
 
 class DelayPedal: public Pedal{
@@ -20,6 +21,7 @@ public:
     DelayPedal();
     void draw();
     float* effect(float* input, int bufferSize);
+    maxiDelayline mdl;
 };
 
 

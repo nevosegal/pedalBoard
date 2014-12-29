@@ -30,6 +30,8 @@
 		7D28C25F1A3F31E800BCC3C7 /* Pedal.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7D28C25D1A3F31E800BCC3C7 /* Pedal.cpp */; };
 		7D28C2621A3F409900BCC3C7 /* BypassButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7D28C2601A3F409900BCC3C7 /* BypassButton.cpp */; };
 		7D3AA5081A403B6F00C88385 /* DelayPedal.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7D3AA5061A403B6F00C88385 /* DelayPedal.cpp */; };
+		7DA0BB8B1A515B7A00FDC6F8 /* DistortionPedal.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7DA0BB891A515B7A00FDC6F8 /* DistortionPedal.cpp */; };
+		7DA0BB8E1A51647700FDC6F8 /* FlangerPedal.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7DA0BB8C1A51647700FDC6F8 /* FlangerPedal.cpp */; };
 		7DAAA3281A4058B400FAD9BA /* ofxUI2DGraph.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7DAAA2CB1A4058B400FAD9BA /* ofxUI2DGraph.cpp */; };
 		7DAAA3291A4058B400FAD9BA /* ofxUI2DPad.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7DAAA2CD1A4058B400FAD9BA /* ofxUI2DPad.cpp */; };
 		7DAAA32A1A4058B400FAD9BA /* ofxUIBaseDraws.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7DAAA2CF1A4058B400FAD9BA /* ofxUIBaseDraws.cpp */; };
@@ -219,6 +221,10 @@
 		7D2CBAA6529BCE46CA661E02 /* maxiAtoms.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = maxiAtoms.h; path = ../../../addons/ofxMaxim/libs/maxiAtoms.h; sourceTree = SOURCE_ROOT; };
 		7D3AA5061A403B6F00C88385 /* DelayPedal.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DelayPedal.cpp; sourceTree = "<group>"; };
 		7D3AA5071A403B6F00C88385 /* DelayPedal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DelayPedal.h; sourceTree = "<group>"; };
+		7DA0BB891A515B7A00FDC6F8 /* DistortionPedal.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DistortionPedal.cpp; sourceTree = "<group>"; };
+		7DA0BB8A1A515B7A00FDC6F8 /* DistortionPedal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DistortionPedal.h; sourceTree = "<group>"; };
+		7DA0BB8C1A51647700FDC6F8 /* FlangerPedal.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FlangerPedal.cpp; sourceTree = "<group>"; };
+		7DA0BB8D1A51647700FDC6F8 /* FlangerPedal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlangerPedal.h; sourceTree = "<group>"; };
 		7DAAA2CA1A4058B400FAD9BA /* ofxUI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxUI.h; sourceTree = "<group>"; };
 		7DAAA2CB1A4058B400FAD9BA /* ofxUI2DGraph.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ofxUI2DGraph.cpp; sourceTree = "<group>"; };
 		7DAAA2CC1A4058B400FAD9BA /* ofxUI2DGraph.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxUI2DGraph.h; sourceTree = "<group>"; };
@@ -1106,6 +1112,10 @@
 				7D3AA5071A403B6F00C88385 /* DelayPedal.h */,
 				7DAAA3671A40902F00FAD9BA /* InputOutput.cpp */,
 				7DAAA3681A40902F00FAD9BA /* InputOutput.h */,
+				7DA0BB891A515B7A00FDC6F8 /* DistortionPedal.cpp */,
+				7DA0BB8A1A515B7A00FDC6F8 /* DistortionPedal.h */,
+				7DA0BB8C1A51647700FDC6F8 /* FlangerPedal.cpp */,
+				7DA0BB8D1A51647700FDC6F8 /* FlangerPedal.h */,
 			);
 			path = src;
 			sourceTree = SOURCE_ROOT;
@@ -1248,6 +1258,7 @@
 				7DAAA32C1A4058B400FAD9BA /* ofxUIButton.cpp in Sources */,
 				5CBB2AB3A60F65431D7B555D /* ofxButton.cpp in Sources */,
 				B266578FC55D23BFEBC042E7 /* ofxGuiGroup.cpp in Sources */,
+				7DA0BB8B1A515B7A00FDC6F8 /* DistortionPedal.cpp in Sources */,
 				7DAAA3631A4061A500FAD9BA /* Knob.cpp in Sources */,
 				483908258D00B98B4BE69F07 /* ofxLabel.cpp in Sources */,
 				7DAAA3601A405A0500FAD9BA /* tinyxmlparser.cpp in Sources */,
@@ -1308,6 +1319,7 @@
 				7DAAA34D1A4058B400FAD9BA /* ofxUITextInput.cpp in Sources */,
 				510CAFE035E576A4E1502D52 /* UdpSocket.cpp in Sources */,
 				7DAAA34C1A4058B400FAD9BA /* ofxUITextArea.cpp in Sources */,
+				7DA0BB8E1A51647700FDC6F8 /* FlangerPedal.cpp in Sources */,
 				A29D8C96AE042ECEAA1BD4F3 /* NetworkingUtilsWin.cpp in Sources */,
 				28090DEB5109115003E8F1C5 /* UdpSocketWin.cpp in Sources */,
 				7DAAA3471A4058B400FAD9BA /* ofxUISortableList.cpp in Sources */,

@@ -17,7 +17,11 @@ DelayPedal::DelayPedal(){
 }
 
 float* DelayPedal::effect(float* input, int bufferSize){
-    cout<< "this is a delay pedal!!" <<endl;
+    if(!bypass_btn.bypassed){
+        for(int i = 0; i < bufferSize; i++){
+            input[i] = (input[i] + (float)mdl.dl((double)input[i], 15000, 0.4))/2;
+        }
+    }
     return input;
 }
 

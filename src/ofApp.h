@@ -4,6 +4,7 @@
 #include "ofxMaxim.h"
 #include "Pedal.h"
 #include "DelayPedal.h"
+#include "DistortionPedal.h"
 #include "InputOutput.h"
 #include <vector>
 
@@ -27,8 +28,6 @@ public:
     void gotMessage(ofMessage msg);
     void exit();
     void drawInOut();
-    DelayPedal dp;
-    
     void audioRequested 	(float * input, int bufferSize, int nChannels); /* output method */
     void audioReceived 	(float * input, int bufferSize, int nChannels); /* input method */
     
@@ -37,6 +36,8 @@ public:
     double prevx, prevy;
     int numPedals;
     std::vector<Pedal*> pedals;
+    DelayPedal dp;
+    DistortionPedal distortion;
     float *myInput;
     double startX, startY, targetX, targetY;
     bool drawLine = false;
