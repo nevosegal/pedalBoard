@@ -21,7 +21,7 @@ float* ChorusPedal::effect(float* input, int bufferSize){
         for(int i = 0; i < bufferSize; i++){
             //flange params:
             //input
-            //delay : tbd
+            //delay time: tbd
             //feedback: 0-1
             //lfo speed: 0-10
             //depth: 0-1

@@ -21,7 +21,10 @@ public:
     DelayPedal();
     void draw();
     float* effect(float* input, int bufferSize);
+    
     maxiDelayline mdl;
+    Knob delayTime;
+    Knob feedback;
 };
 
 

@@ -68,10 +68,8 @@ bool chainFound = false;
 int lastPedal = 0;
 int counter = 0;
 void ofApp::audioRequested 	(float * output, int bufferSize, int nChannels){
-    chainFound = false;
 
-//    cout << "Before:";
-//    cout << myInput[0] << endl;
+    chainFound = false;
     if(audioIn.isConnected()){
         for(int i = 0 ; i < numPedals; i++) {
             if(&pedals.at(i)->getInput() == &audioIn.getConnection()){
@@ -95,8 +93,6 @@ void ofApp::audioRequested 	(float * output, int bufferSize, int nChannels){
         }
         counter++;
     }
-//    cout << "After:";
-//    cout << myInput[0] << endl;
     
     if(audioOut.isConnected() && &pedals.at(lastPedal)->getOutput().getConnection() == &audioOut){
         for (int i = 0; i < bufferSize; i++){

@@ -13,6 +13,7 @@
 #include "ofMain.h"
 #include "BypassButton.h"
 #include "InputOutput.h"
+#include "Knob.h"
 
 class Pedal{
     

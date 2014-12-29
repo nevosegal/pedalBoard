@@ -12,4 +12,23 @@
 #include <stdio.h>
 #include "ofMain.h"
 
+
+class Knob{
+    
+public:
+    Knob(float x, float y, float range);
+    Knob();
+//    ~Knob();
+    
+    void setValue(float value);
+    float getValue();
+    void draw();
+    bool isHovered();
+    
+    float value;
+    float range;
+    float radius;
+    float x, y;
+    
+};
 #endif /* defined(__pedalBoard__Knob__) */
