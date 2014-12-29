@@ -167,7 +167,8 @@ void ofApp::mousePressed(int x, int y, int button){
             prevy = y;
             if(pedals.at(i)->getNumKnobs() != 0){
                 for(int j = 0; j < pedals.at(i)->getNumKnobs(); j++){
-                    if(pedals.at(i)->getKnob(j).isHovered()){
+                    if(pedals.at(i)->getKnob(j).isHovered(x,y)){
+                        cout << pedals.at(i)->getKnob(j).range << endl;
                         pedals.at(i)->getKnob(j).engaged = true;
                     }
                 }

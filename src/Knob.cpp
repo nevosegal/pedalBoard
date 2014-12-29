@@ -36,7 +36,7 @@ void Knob::draw(){
 //    ofDrawBitmapString(this->name, this->x - (tf.stringWidth(name)/2), this->y);
 }
 
-bool Knob::isHovered(){
+bool Knob::isHovered(int x, int y){
     if(x > (this->x - this->radius) && x < (this->x + this->radius)&&
        y > (this->y - this->radius) && y < (this->y + this->radius)){
         return true;

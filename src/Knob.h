@@ -23,7 +23,7 @@ public:
     void setValue(float value);
     float getValue();
     void draw();
-    bool isHovered();
+    bool isHovered(int x, int y);
     bool isEngaged();
     void toggleEngage();
     
