@@ -22,9 +22,12 @@ void ofApp::setup(){
     
     distortion = *new DistortionPedal(250,70,7);
     dp = *new DelayPedal(50,70,6);
+    flanger = *new FlangerPedal(450,70,8);
+    
     pedals.push_back(&dp);
     pedals.push_back(&distortion);
-    for(int i = 2 ; i < numPedals; i++){
+    pedals.push_back(&flanger);
+    for(int i = 3 ; i < numPedals; i++){
         pedals.push_back(new Pedal(50 + i*200, 70,i));
     }
     cableHoverColor = 150;

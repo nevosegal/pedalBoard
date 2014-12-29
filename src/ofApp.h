@@ -5,6 +5,7 @@
 #include "Pedal.h"
 #include "DelayPedal.h"
 #include "DistortionPedal.h"
+#include "FlangerPedal.h"
 #include "InputOutput.h"
 #include <vector>
 
@@ -38,6 +39,7 @@ public:
     std::vector<Pedal*> pedals;
     DelayPedal dp;
     DistortionPedal distortion;
+    FlangerPedal flanger;
     float *myInput;
     double startX, startY, targetX, targetY;
     bool drawLine = false;
