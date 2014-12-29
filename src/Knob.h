@@ -16,7 +16,7 @@
 class Knob{
     
 public:
-    Knob(float x, float y, float range);
+    Knob(float x, float y, float range, string name);
     Knob();
 //    ~Knob();
     
@@ -24,11 +24,16 @@ public:
     float getValue();
     void draw();
     bool isHovered();
+    bool isEngaged();
+    void toggleEngage();
     
     float value;
     float range;
     float radius;
     float x, y;
+    bool engaged;
+    string name;
+    ofTrueTypeFont tf;
     
 };
 #endif /* defined(__pedalBoard__Knob__) */

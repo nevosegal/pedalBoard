@@ -21,10 +21,10 @@ public:
     DelayPedal();
     void draw();
     float* effect(float* input, int bufferSize);
+    void move(double x, double y);
     
     maxiDelayline mdl;
-    Knob delayTime;
-    Knob feedback;
+
 };
 
 

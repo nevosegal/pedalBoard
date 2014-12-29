@@ -28,7 +28,7 @@ public:
     void update();
     virtual void draw();
     BypassButton& getBypassButton();
-    void move(double x, double y);
+    virtual void move(double x, double y);
     virtual float* effect(float* input, int bufferSize);
     bool isInBounds(int x, int y);
     bool isEngaged();
@@ -37,6 +37,8 @@ public:
     void setInput(InputOutput in);
     void setOutput(InputOutput out);
     int getId();
+    int getNumKnobs();
+    Knob& getKnob(int index);
     
     //members
     double x, y, xsize, ysize;
@@ -45,6 +47,9 @@ public:
     InputOutput input;
     InputOutput output;
     int id;
+    int numKnobs;
+    Knob* knobs;
+
 
 };
 

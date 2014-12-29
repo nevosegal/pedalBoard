@@ -24,6 +24,7 @@ Pedal::Pedal(double x, double y, int id){
     input = *new InputOutput("Input",x,y+ysize/2);
     output = *new InputOutput("Output",x+xsize,y+ysize/2);
     this->id = id;
+    knobs = new Knob[numKnobs];
 }
 
 void Pedal::setup(){
@@ -98,6 +99,13 @@ int Pedal::getId(){
     return id;
 }
 
+Knob& Pedal::getKnob(int index){
+    return knobs[index];
+}
+
+int Pedal::getNumKnobs(){
+    return numKnobs;
+}
 
 
 

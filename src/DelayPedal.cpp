@@ -10,20 +10,21 @@
 
 DelayPedal::DelayPedal(double x, double y, int id)
 :Pedal(x, y, id){
-    delayTime = *new Knob(20000);
-    feedback = *new Knob(1);
+    numKnobs = 2;
+    knobs = new Knob[numKnobs];
+    knobs[0] = *new Knob(x+(xsize/4), y+(ysize/4), 20000, "Delay Time");
+    knobs[1] = *new Knob(x+3*(xsize/4), y+(ysize/4), 1, "Feedback");
 }
+
 DelayPedal::DelayPedal(){
-    
+    numKnobs = 2;
+    knobs = new Knob[numKnobs];
 }
 
 float* DelayPedal::effect(float* input, int bufferSize){
     if(!bypass_btn.bypassed){
         for(int i = 0; i < bufferSize; i++){
-            //params:
-                //delay time
-                //feedback
-            input[i] = (input[i] + (float)mdl.dl((double)input[i], delayTime.getValue(), feedback.getValue()))/2;
+            input[i] = (input[i] + (float)mdl.dl((double)input[i], knobs[0].getValue(), knobs[1].getValue()))/2;
         }
     }
     return input;
@@ -35,6 +36,15 @@ void DelayPedal::draw(){
     bypass_btn.draw();
     input.draw();
     output.draw();
-    delayTime.draw(x+(xsize/4), y+(ysize/4));
-    feedback.draw(x+3*(xsize/4), y+(ysize/4));
+    for(int i = 0; i < numKnobs; i++){
+        knobs[i].draw();
+    }
+}
+
+void DelayPedal::move(double x, double y){
+    Pedal::move(x, y);
+    for(int i = 0; i < numKnobs; i++){
+        knobs[i].x += x;
+        knobs[i].y += y;
+    }
 }

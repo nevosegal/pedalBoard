@@ -12,12 +12,14 @@ Knob::Knob(){
     
 }
 
-Knob::Knob(float x, float y, float range){
+Knob::Knob(float x, float y, float range, string name){
     this->x = x;
     this->y = y;
     this->range = range;
     this->value = 0;
     this->radius = 25;
+    this->engaged = false;
+    this->name = name;
 }
 
 float Knob::getValue(){
@@ -31,6 +33,7 @@ void Knob::setValue(float value){
 void Knob::draw(){
     ofSetColor(255,255,255);
     ofCircle(this->x, this->y, this->radius);
+//    ofDrawBitmapString(this->name, this->x - (tf.stringWidth(name)/2), this->y);
 }
 
 bool Knob::isHovered(){
@@ -39,4 +42,12 @@ bool Knob::isHovered(){
         return true;
     }
     return false;
+}
+
+bool Knob::isEngaged(){
+    return engaged;
+}
+
+void Knob::toggleEngage(){
+    engaged = !engaged;
 }
