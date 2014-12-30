@@ -17,7 +17,7 @@ Knob::Knob(float x, float y, float range, string name){
     this->y = y;
     this->range = range;
     this->value = 0;
-    this->radius = 25;
+    this->radius = 20;
     this->engaged = false;
     this->name = name;
     tf.loadFont("Cuprum-Bold.ttf", fontSize);

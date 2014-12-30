@@ -21,10 +21,10 @@ void ofApp::setup(){
     myInput = new float[initialBufferSize];
     numPedals = 4;
     
-    distortion = *new DistortionPedal(250,70,7);
-    dp = *new DelayPedal(50,70,6);
-    flanger = *new FlangerPedal(450,70,8);
-    chorus = *new ChorusPedal(650,70,9);
+    dp = *new DelayPedal(80,75,6);
+    distortion = *new DistortionPedal(310,75,7);
+    flanger = *new FlangerPedal(540,75,8);
+    chorus = *new ChorusPedal(770,75,9);
     
     pedals.push_back(&dp);
     pedals.push_back(&distortion);

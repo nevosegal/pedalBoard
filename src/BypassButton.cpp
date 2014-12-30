@@ -18,7 +18,7 @@ BypassButton::BypassButton(){
 BypassButton::BypassButton(double x, double y){
     this->x = x;
     this->y = y;
-    radius = 20;
+    radius = 15;
     bypassed = true;
 }
 

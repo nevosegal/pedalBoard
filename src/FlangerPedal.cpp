@@ -13,8 +13,8 @@ FlangerPedal::FlangerPedal(double x, double y, int id)
     knobs = new Knob[numKnobs];
     knobs[0] = *new Knob(x+(xsize/4), y+(ysize/4), 1000, "Delay Time");
     knobs[1] = *new Knob(x+3*(xsize/4), y+(ysize/4), 1, "Feedback");
-    knobs[2] = *new Knob(x+(xsize/4), y+(ysize/1.9), 10, "LFO Speed");
-    knobs[3] = *new Knob(x+3*(xsize/4), y+(ysize/1.9), 1, "Depth");
+    knobs[2] = *new Knob(x+(xsize/4), y+(ysize/2), 10, "LFO Speed");
+    knobs[3] = *new Knob(x+3*(xsize/4), y+(ysize/2), 1, "Depth");
 }
 FlangerPedal::FlangerPedal(){
     numKnobs = 4;
