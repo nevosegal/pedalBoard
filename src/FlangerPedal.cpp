@@ -38,7 +38,7 @@ float* FlangerPedal::effect(float* input, int bufferSize){
 
 void FlangerPedal::draw(){
     ofFill();
-    ofSetHexColor(0xff00ff);
+    ofSetHexColor(0x295186);
     ofRectRounded(x,y,xsize, ysize, 8);
     bypass_btn.draw();
     input.draw();

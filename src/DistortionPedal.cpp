@@ -31,7 +31,7 @@ float* DistortionPedal::effect(float* input, int bufferSize){
 
 void DistortionPedal::draw(){
     ofFill();
-    ofSetHexColor(0x0000ff);
+    ofSetHexColor(0x262626);
     ofRectRounded(x,y,xsize, ysize, 8);
     bypass_btn.draw();
     input.draw();

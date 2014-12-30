@@ -36,7 +36,7 @@ void Knob::setValue(float value){
 void Knob::draw(){
     ofEnableSmoothing();
     ofFill();
-    ofSetColor(255,255,255);
+    ofSetColor(10,10,10);
     ofCircle(this->x, this->y, this->radius);
     if(isEngaged()){
         ofNoFill();
@@ -45,7 +45,7 @@ void Knob::draw(){
     }
     ofRectangle typeRect = tf.getStringBoundingBox(name, 0, 0);
     ofRectangle valueRect = tf.getStringBoundingBox(ofToString(value), 0, 0);
-    ofSetColor(0,0,0);
+    ofSetColor(220,220,220);
     tf.drawString(name, this->x-(typeRect.width/2), this->y-this->radius-5);
     tf.drawString(ofToString(this->value), this->x-(valueRect.width/2), this->y+(fontSize/2));
 }
