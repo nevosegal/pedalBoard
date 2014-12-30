@@ -20,7 +20,7 @@ Pedal::Pedal(double x, double y, int id){
     this->y = y;
     xsize = 150;
     ysize = 250;
-    bypass_btn = *new BypassButton(x+(xsize/2),y+(2*ysize/3));
+    bypass_btn = *new BypassButton(x+(xsize/2),y+(2.2*ysize/3));
     engaged = false;
     input = *new InputOutput("Input",x,y+ysize/2);
     output = *new InputOutput("Output",x+xsize,y+ysize/2);
@@ -51,7 +51,7 @@ void Pedal::move(double x, double y){
     this->x += x;
     this->y += y;
     bypass_btn.x = this->x + (xsize/2);
-    bypass_btn.y = this->y + (2*ysize/3);
+    bypass_btn.y = this->y + (2.2*ysize/3);
     input.x += x;
     input.y += y;
     output.x += x;
@@ -73,10 +73,8 @@ float* Pedal::effect(float* input, int bufferSize){
 
 bool Pedal::isInBounds(int x, int y){
     if(x > this->x && x < (this->x + xsize) && y > this->y && y < (this->y + ysize)){
-//        engaged = true;
         return true;
     }
-//    engaged = false;
     return false;
 }
 

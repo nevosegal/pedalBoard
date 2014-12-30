@@ -82,19 +82,19 @@ void ofApp::audioRequested 	(float * output, int bufferSize, int nChannels){
     
     while(!chainFound){
         for(int i = 0; i < numPedals; i++){
-            if(&pedals.at(i)->getInput().getConnection() == &pedals.at(lastPedal)->getOutput()){
+            if(pedals.at(i)->getInput().isConnected() && &pedals.at(i)->getInput().getConnection() == &pedals.at(lastPedal)->getOutput()){
                 myInput = pedals.at(i)->effect(myInput, bufferSize);
                 lastPedal = i;
             }
         }
-        if(counter > 50){
+        counter++;
+        if(counter > numPedals){
             counter = 0;
             chainFound = true;
         }
-        counter++;
     }
     
-    if(audioOut.isConnected() && &pedals.at(lastPedal)->getOutput().getConnection() == &audioOut){
+    if(audioIn.isConnected() && audioOut.isConnected() && &pedals.at(lastPedal)->getOutput().getConnection() == &audioOut){
         for (int i = 0; i < bufferSize; i++){
             output[i] = myInput[i];
         }
@@ -151,7 +151,6 @@ void ofApp::mouseDragged(int x, int y, int button){
                     float currValue = pedals.at(i)->getKnob(j).getValue();
                     float currRange = pedals.at(i)->getKnob(j).range;
                     pedals.at(i)->getKnob(j).setValue(currValue + deltay*currRange/mouseRange);
-//                    cout << pedals.at(i)->getKnob(j).getValue() << endl;
                 }
             }
         }
@@ -174,7 +173,6 @@ void ofApp::mousePressed(int x, int y, int button){
                 for(int j = 0; j < pedals.at(i)->getNumKnobs(); j++){
                     if(pedals.at(i)->getKnob(j).isHovered(x,y)){
                         found = true;
-//                        cout << pedals.at(i)->getKnob(j).range << endl;
                         pedals.at(i)->getKnob(j).engaged = true;
                     }
                 }
@@ -190,6 +188,14 @@ void ofApp::mousePressed(int x, int y, int button){
             targetX = x;
             targetY = y;
             drawLine = true;
+        }
+        else if(pedals.at(i)->getInput().isInBounds(x,y)){
+            pedals.at(i)->getInput().getConnection().disconnect();
+            pedals.at(i)->getInput().disconnect();
+        }
+        else if(audioOut.isInBounds(x, y)){
+            audioOut.disconnect();
+            audioOut.getConnection().disconnect();
         }
         else if(audioIn.isInBounds(x, y)){
             tempPedal = 100;
@@ -210,13 +216,15 @@ void ofApp::mouseReleased(int x, int y, int button){
             bb.toggle();
             break;
         }
-        else if (tempPedal != 100 && (!pedals.at(i)->getInput().isConnected() || !audioOut.isConnected()) && drawLine){
+        else if (tempPedal != 100 && !pedals.at(i)->getInput().isConnected() && drawLine){
             if(pedals.at(i)->getInput().isInBounds(x, y)){
                 pedals.at(i)->getInput().setConnection(pedals.at(tempPedal)->getOutput());
                 pedals.at(tempPedal)->getOutput().setConnection(pedals.at(i)->getInput());
                 break;
             }
-            else if(audioOut.isInBounds(x, y)){
+        }
+        else if(tempPedal != 100 && !audioOut.isConnected() && drawLine){
+            if(audioOut.isInBounds(x, y)){
                 audioOut.setConnection(pedals.at(tempPedal)->getOutput());
                 pedals.at(tempPedal)->getOutput().setConnection(audioOut);
                 break;
