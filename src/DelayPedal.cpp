@@ -31,6 +31,7 @@ float* DelayPedal::effect(float* input, int bufferSize){
 }
 
 void DelayPedal::draw(){
+    ofFill();
     ofSetHexColor(0x00ff00);
     ofRectRounded(x,y,xsize, ysize, 8);
     bypass_btn.draw();
@@ -43,8 +44,5 @@ void DelayPedal::draw(){
 
 void DelayPedal::move(double x, double y){
     Pedal::move(x, y);
-    for(int i = 0; i < numKnobs; i++){
-        knobs[i].x += x;
-        knobs[i].y += y;
-    }
+
 }

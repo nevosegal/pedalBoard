@@ -37,6 +37,7 @@ bool InputOutput::isConnected(){
 }
 
 void InputOutput::draw(){
+    ofFill();
     ofSetHexColor(0xaaaaaa);
     ofCircle(x, y, radius);
 }

@@ -137,17 +137,21 @@ void ofApp::mouseMoved(int x, int y ){
 void ofApp::mouseDragged(int x, int y, int button){
     for(int i = 0; i < numPedals; i++){
         if(pedals.at(i)->isEngaged() && pedals.at(i)->isInBounds(x,y)){
-            if(!pedals.at(i)->getOutput().isInBounds(x,y)){
-                double deltax = x-prevx;
-                double deltay = y-prevy;
-                pedals.at(i)->move(deltax, deltay);
-                prevx = x;
-                prevy = y;
-            }
+            double deltax = x-prevx;
+            double deltay = y-prevy;
+            pedals.at(i)->move(deltax, deltay);
+            prevx = x;
+            prevy = y;
+        }
+        else{
+            float mouseRange = 200;
             for(int j = 0 ; j < pedals.at(i)->getNumKnobs() ; j++){
                 if(pedals.at(i)->getKnob(j).isEngaged()){
-                    cout << i << endl;
-                    cout << j << endl;
+                    double deltay = prevy-y;
+                    float currValue = pedals.at(i)->getKnob(j).getValue();
+                    float currRange = pedals.at(i)->getKnob(j).range;
+                    pedals.at(i)->getKnob(j).setValue(currValue + deltay*currRange/mouseRange);
+//                    cout << pedals.at(i)->getKnob(j).getValue() << endl;
                 }
             }
         }
@@ -161,6 +165,7 @@ void ofApp::mouseDragged(int x, int y, int button){
 int tempPedal;
 //--------------------------------------------------------------
 void ofApp::mousePressed(int x, int y, int button){
+    bool found = false;
     for(int i = 0; i < numPedals; i++){
         if(pedals.at(i)->isInBounds(x, y) && !pedals.at(i)->getOutput().isInBounds(x, y)){
             prevx = x;
@@ -168,10 +173,14 @@ void ofApp::mousePressed(int x, int y, int button){
             if(pedals.at(i)->getNumKnobs() != 0){
                 for(int j = 0; j < pedals.at(i)->getNumKnobs(); j++){
                     if(pedals.at(i)->getKnob(j).isHovered(x,y)){
-                        cout << pedals.at(i)->getKnob(j).range << endl;
+                        found = true;
+//                        cout << pedals.at(i)->getKnob(j).range << endl;
                         pedals.at(i)->getKnob(j).engaged = true;
                     }
                 }
+            }
+            if(!found){
+                pedals.at(i)->engaged = true;
             }
         }
         else if(pedals.at(i)->getOutput().isInBounds(x,y) && !pedals.at(i)->getOutput().isConnected()){
@@ -221,8 +230,8 @@ void ofApp::mouseReleased(int x, int y, int button){
         pedals.at(i)->engaged = false;
         if(pedals.at(i)->getNumKnobs() != 0){
             for(int j = 0; j < pedals.at(i)->getNumKnobs(); j++){
-                if(pedals.at(j)->getKnob(j).isEngaged()){
-                    pedals.at(j)->getKnob(j).engaged = false;
+                if(pedals.at(i)->getKnob(j).isEngaged()){
+                    pedals.at(i)->getKnob(j).engaged = false;
                 }
 
             }

@@ -34,6 +34,6 @@ public:
     bool engaged;
     string name;
     ofTrueTypeFont tf;
-    
+    int fontSize = 12;
 };
 #endif /* defined(__pedalBoard__Knob__) */

@@ -12,6 +12,7 @@
 Pedal::Pedal(){
     //TBD
     id = 100;
+    knobs = new Knob[numKnobs];
 }
 
 Pedal::Pedal(double x, double y, int id){
@@ -24,7 +25,6 @@ Pedal::Pedal(double x, double y, int id){
     input = *new InputOutput("Input",x,y+ysize/2);
     output = *new InputOutput("Output",x+xsize,y+ysize/2);
     this->id = id;
-    knobs = new Knob[numKnobs];
 }
 
 void Pedal::setup(){
@@ -35,6 +35,7 @@ void Pedal::update(){
 }
 
 void Pedal::draw(){
+    ofFill();
     ofSetHexColor(0xffffff);
     ofRectRounded(x,y,xsize, ysize, 8);
     bypass_btn.draw();
@@ -55,6 +56,10 @@ void Pedal::move(double x, double y){
     input.y += y;
     output.x += x;
     output.y += y;
+    for(int i = 0; i < numKnobs; i++){
+        knobs[i].x += x;
+        knobs[i].y += y;
+    }
 }
 
 float* Pedal::effect(float* input, int bufferSize){
@@ -68,10 +73,10 @@ float* Pedal::effect(float* input, int bufferSize){
 
 bool Pedal::isInBounds(int x, int y){
     if(x > this->x && x < (this->x + xsize) && y > this->y && y < (this->y + ysize)){
-        engaged = true;
+//        engaged = true;
         return true;
     }
-    engaged = false;
+//    engaged = false;
     return false;
 }
 
