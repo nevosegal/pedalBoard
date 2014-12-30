@@ -47,4 +47,6 @@ void ChorusPedal::draw(){
     for(int i = 0; i < numKnobs; i++){
         knobs[i].draw();
     }
+    ofRectangle headerRect = header.getStringBoundingBox(ofToString("Chorus"), 0, 0);
+    header.drawString("Chorus", this->x + (this->xsize/2) - (headerRect.width/2) , this->y+this->ysize - 20);
 }

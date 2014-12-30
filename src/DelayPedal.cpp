@@ -32,7 +32,7 @@ float* DelayPedal::effect(float* input, int bufferSize){
 
 void DelayPedal::draw(){
     ofFill();
-    ofSetHexColor(0x072800);
+    ofSetHexColor(0x075C00);
     ofRectRounded(x,y,xsize, ysize, 8);
     bypass_btn.draw();
     input.draw();
@@ -40,9 +40,6 @@ void DelayPedal::draw(){
     for(int i = 0; i < numKnobs; i++){
         knobs[i].draw();
     }
-}
-
-void DelayPedal::move(double x, double y){
-    Pedal::move(x, y);
-
+    ofRectangle headerRect = header.getStringBoundingBox(ofToString("Delay"), 0, 0);
+    header.drawString("Delay", this->x + (this->xsize/2) - (headerRect.width/2) , this->y+this->ysize - 20);
 }

@@ -12,7 +12,8 @@ void ofApp::setup(){
     
     ofEnableAlphaBlending();
     ofSetupScreen();
-    ofBackground(0, 0, 0);
+    background.loadImage("background.jpg");
+//    ofBackground(200, 200, 200);
     ofSetVerticalSync(true);
 
     sampleRate 			= 44100; /* Sampling Rate */
@@ -42,6 +43,7 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
+    background.draw(0, 0, ofGetWidth(), ofGetHeight());
     for (int i = 0; i < numPedals; i++) {
         pedals.at(i)->draw();
     }

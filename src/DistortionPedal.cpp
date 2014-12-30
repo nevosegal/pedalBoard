@@ -39,4 +39,6 @@ void DistortionPedal::draw(){
     for(int i = 0; i < numKnobs; i++){
         knobs[i].draw();
     }
+    ofRectangle headerRect = header.getStringBoundingBox(ofToString("Distortion"), 0, 0);
+    header.drawString("Distortion", this->x + (this->xsize/2) - (headerRect.width/2) , this->y+this->ysize - 20);
 }

@@ -28,7 +28,7 @@ public:
     void update();
     virtual void draw();
     BypassButton& getBypassButton();
-    virtual void move(double x, double y);
+    void move(double x, double y);
     virtual float* effect(float* input, int bufferSize);
     bool isInBounds(int x, int y);
     bool isEngaged();
@@ -49,6 +49,7 @@ public:
     int id;
     int numKnobs;
     Knob* knobs;
+    ofTrueTypeFont header;
 
 
 };

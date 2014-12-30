@@ -47,5 +47,6 @@ public:
     bool drawLine = false;
     int cableHoverColor;
     InputOutput audioIn, audioOut;
+    ofImage background;
     
 };

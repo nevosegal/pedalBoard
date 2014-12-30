@@ -25,10 +25,10 @@ Pedal::Pedal(double x, double y, int id){
     input = *new InputOutput("Input",x,y+ysize/2);
     output = *new InputOutput("Output",x+xsize,y+ysize/2);
     this->id = id;
+    header.loadFont("Lobster-Regular.ttf", 16);
 }
 
 void Pedal::setup(){
-
 }
 
 void Pedal::update(){
