@@ -31,8 +31,8 @@ void ofApp::setup(){
     pedals.push_back(&chorus);
 
     cableColor = 80;
-    audioIn = *new InputOutput("input", 0, (double)ofGetHeight()/2);
-    audioOut = *new InputOutput("output", ofGetWidth(), (double)ofGetHeight()/2);
+    audioIn = *new InputOutput("input", 10, (double)ofGetHeight()/2);
+    audioOut = *new InputOutput("output", ofGetWidth() - 10, (double)ofGetHeight()/2);
     ofSoundStreamSetup(1,1,this, sampleRate, initialBufferSize, 4);/* Call this last ! */
 }
 
@@ -134,9 +134,16 @@ void ofApp::mouseMoved(int x, int y ){
             if(pedals.at(i)->getInput().getColor() != 255){
                 pedals.at(i)->getInput().setColor(255);
             }
-        }else{
-            if(pedals.at(i)->getInput().getColor() != 120){
+        }
+        else if(audioOut.isConnected() && audioOut.isInBounds(x, y)){
+            if(audioOut.getColor() != 255){
+                audioOut.setColor(255);
+            }
+        }
+        else{
+            if(pedals.at(i)->getInput().getColor() != 120 || audioOut.getColor() != 120){
                 pedals.at(i)->getInput().setColor(120);
+                audioOut.setColor(120);
             }
         }
     }
@@ -176,7 +183,7 @@ int tempPedal;
 void ofApp::mousePressed(int x, int y, int button){
     bool found = false;
     for(int i = 0; i < numPedals; i++){
-        if(pedals.at(i)->isInBounds(x, y) && !pedals.at(i)->getOutput().isInBounds(x, y)){
+        if(pedals.at(i)->isInBounds(x, y) && !pedals.at(i)->getOutput().isInBounds(x, y) && !pedals.at(i)->getInput().isInBounds(x, y)){
             prevx = x;
             prevy = y;
             if(pedals.at(i)->getNumKnobs() != 0){
@@ -226,21 +233,21 @@ void ofApp::mouseReleased(int x, int y, int button){
             bb.toggle();
             break;
         }
-        else if (tempPedal != 100 && !pedals.at(i)->getInput().isConnected() && drawLine){
+        if (tempPedal != 100 && !pedals.at(i)->getInput().isConnected() && drawLine){
             if(pedals.at(i)->getInput().isInBounds(x, y)){
                 pedals.at(i)->getInput().setConnection(pedals.at(tempPedal)->getOutput());
                 pedals.at(tempPedal)->getOutput().setConnection(pedals.at(i)->getInput());
                 break;
             }
         }
-        else if(tempPedal != 100 && !audioOut.isConnected() && drawLine){
+        if(tempPedal != 100 && !audioOut.isConnected() && drawLine){
             if(audioOut.isInBounds(x, y)){
                 audioOut.setConnection(pedals.at(tempPedal)->getOutput());
                 pedals.at(tempPedal)->getOutput().setConnection(audioOut);
                 break;
             }
         }
-        else if (tempPedal == 100 && !audioIn.isConnected() && drawLine && pedals.at(i)->getInput().isInBounds(x, y)){
+        if (tempPedal == 100 && !audioIn.isConnected() && drawLine && pedals.at(i)->getInput().isInBounds(x, y)){
             pedals.at(i)->getInput().setConnection(audioIn);
             audioIn.setConnection(pedals.at(i)->getInput());
             break;
