@@ -17,6 +17,7 @@ InputOutput::InputOutput(string type,double x, double y){
     this->x = x;
     this->y = y;
     radius = 6;
+    col = 120;
 }
 
 void InputOutput::setConnection(InputOutput& inOut){
@@ -38,7 +39,7 @@ bool InputOutput::isConnected(){
 
 void InputOutput::draw(){
     ofFill();
-    ofSetHexColor(0xaaaaaa);
+    ofSetColor(col, 120, 120);
     ofCircle(x, y, radius);
 }
 
@@ -55,6 +56,14 @@ double InputOutput::getX(){
 
 double InputOutput::getY(){
     return y;
+}
+
+void InputOutput::setColor(int col){
+    this->col = col;
+}
+
+int InputOutput::getColor(){
+    return col;
 }
 
 

@@ -13,7 +13,6 @@ void ofApp::setup(){
     ofEnableAlphaBlending();
     ofSetupScreen();
     background.loadImage("background.jpg");
-//    ofBackground(200, 200, 200);
     ofSetVerticalSync(true);
 
     sampleRate 			= 44100; /* Sampling Rate */
@@ -31,7 +30,7 @@ void ofApp::setup(){
     pedals.push_back(&flanger);
     pedals.push_back(&chorus);
 
-    cableHoverColor = 150;
+    cableColor = 80;
     audioIn = *new InputOutput("input", 0, (double)ofGetHeight()/2);
     audioOut = *new InputOutput("output", ofGetWidth(), (double)ofGetHeight()/2);
     ofSoundStreamSetup(1,1,this, sampleRate, initialBufferSize, 4);/* Call this last ! */
@@ -43,16 +42,18 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
+    ofSetColor(200);
     background.draw(0, 0, ofGetWidth(), ofGetHeight());
     for (int i = 0; i < numPedals; i++) {
         pedals.at(i)->draw();
     }
 
+    ofSetColor(cableColor);
+    
     if(drawLine){
+        ofSetLineWidth(3);
         ofLine(startX, startY, targetX, targetY);
     }
-    
-    ofSetColor(cableHoverColor);
     for(int i = 0; i < numPedals ; i++){
         if(pedals.at(i)->getInput().isConnected()){
             ofLine(pedals.at(i)->getInput().getConnection().getX(), pedals.at(i)->getInput().getConnection().getY(), pedals.at(i)->getInput().getX(), pedals.at(i)->getInput().getY());
@@ -129,8 +130,14 @@ void ofApp::keyReleased(int key){
 //--------------------------------------------------------------
 void ofApp::mouseMoved(int x, int y ){
     for(int i = 0; i < numPedals; i++){
-        if(pedals.at(i)->isInBounds(x, y)){
-            //TBD: act when hovered
+        if(pedals.at(i)->getInput().isConnected() && pedals.at(i)->getInput().isInBounds(x, y)){
+            if(pedals.at(i)->getInput().getColor() != 255){
+                pedals.at(i)->getInput().setColor(255);
+            }
+        }else{
+            if(pedals.at(i)->getInput().getColor() != 120){
+                pedals.at(i)->getInput().setColor(120);
+            }
         }
     }
 }
@@ -153,6 +160,7 @@ void ofApp::mouseDragged(int x, int y, int button){
                     float currValue = pedals.at(i)->getKnob(j).getValue();
                     float currRange = pedals.at(i)->getKnob(j).range;
                     pedals.at(i)->getKnob(j).setValue(currValue + deltay*currRange/mouseRange);
+                    prevy = y;
                 }
             }
         }

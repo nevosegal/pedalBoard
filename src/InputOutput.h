@@ -28,12 +28,15 @@ public:
     double getX();
     double getY();
     void setConnection(InputOutput &inOut);
+    int getColor();
+    void setColor(int col);
     bool connected;
     string type;
     InputOutput *inputOutput;
 
     double x,y;
     int radius;
+    int col;
 };
 
 

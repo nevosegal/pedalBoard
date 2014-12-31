@@ -45,7 +45,7 @@ public:
     float *myInput;
     double startX, startY, targetX, targetY;
     bool drawLine = false;
-    int cableHoverColor;
+    int cableColor;
     InputOutput audioIn, audioOut;
     ofImage background;
     
