@@ -91,13 +91,13 @@ void ofApp::audioRequested 	(float * output, int bufferSize, int nChannels){
             }
         }
         counter++;
-        if(counter > numPedals){
+        if(counter > 10){
             counter = 0;
             chainFound = true;
         }
     }
     
-    if(audioIn.isConnected() && audioOut.isConnected() && &pedals.at(lastPedal)->getOutput().getConnection() == &audioOut){
+    if(audioIn.isConnected() && audioOut.isConnected() && &pedals.at(lastPedal)->getOutput() == &audioOut.getConnection()){
         for (int i = 0; i < bufferSize; i++){
             output[i] = myInput[i];
         }
