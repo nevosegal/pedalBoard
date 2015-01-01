@@ -23,9 +23,6 @@ public:
     Pedal();
     Pedal(double x, double y, int id);
     
-    //methods
-    void setup();
-    void update();
     virtual void draw();
     BypassButton& getBypassButton();
     void move(double x, double y);

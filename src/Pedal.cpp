@@ -28,12 +28,6 @@ Pedal::Pedal(double x, double y, int id){
     header.loadFont("Lobster-Regular.ttf", 16);
 }
 
-void Pedal::setup(){
-}
-
-void Pedal::update(){
-}
-
 void Pedal::draw(){
     ofFill();
     ofSetHexColor(0xffffff);

@@ -48,5 +48,7 @@ public:
     int cableColor;
     InputOutput audioIn, audioOut;
     ofImage background;
+    ofxMaxiMix mymix;
+    double outputs[2];
     
 };

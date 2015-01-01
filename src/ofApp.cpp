@@ -33,7 +33,7 @@ void ofApp::setup(){
     cableColor = 80;
     audioIn = *new InputOutput("input", 10, (double)ofGetHeight()/2);
     audioOut = *new InputOutput("output", ofGetWidth() - 10, (double)ofGetHeight()/2);
-    ofSoundStreamSetup(1,1,this, sampleRate, initialBufferSize, 4);/* Call this last ! */
+    ofSoundStreamSetup(2,1,this, sampleRate, initialBufferSize, 4);
 }
 
 //--------------------------------------------------------------
@@ -99,15 +99,20 @@ void ofApp::audioRequested 	(float * output, int bufferSize, int nChannels){
     
     if(audioIn.isConnected() && audioOut.isConnected() && &pedals.at(lastPedal)->getOutput() == &audioOut.getConnection()){
         for (int i = 0; i < bufferSize; i++){
-            output[i] = myInput[i];
+            
+            mymix.stereo(myInput[i], outputs, 0.5);
+            
+            output[i*nChannels] = outputs[0];
+            output[i*nChannels+1] = outputs[1];
         }
     }
     else{
         for (int i = 0; i < bufferSize; i++){
-            output[i] = 0;
+            output[i*nChannels] = 0;
+            output[i*nChannels+1] = 0;
         }
     }
-    
+
 
 }
 //--------------------------------------------------------------
