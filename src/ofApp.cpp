@@ -91,7 +91,7 @@ void ofApp::audioRequested 	(float * output, int bufferSize, int nChannels){
             }
         }
         counter++;
-        if(counter > 10){
+        if(counter > numPedals){
             counter = 0;
             chainFound = true;
         }
@@ -188,7 +188,8 @@ int tempPedal;
 void ofApp::mousePressed(int x, int y, int button){
     bool found = false;
     for(int i = 0; i < numPedals; i++){
-        if(pedals.at(i)->isInBounds(x, y) && !pedals.at(i)->getOutput().isInBounds(x, y) && !pedals.at(i)->getInput().isInBounds(x, y)){
+        if(pedals.at(i)->isInBounds(x, y) && !pedals.at(i)->getOutput().isInBounds(x, y) &&
+           !pedals.at(i)->getInput().isInBounds(x, y) && !pedals.at(i)->bypass_btn.isInBounds(x, y)){
             prevx = x;
             prevy = y;
             if(pedals.at(i)->getNumKnobs() != 0){
@@ -200,6 +201,7 @@ void ofApp::mousePressed(int x, int y, int button){
                 }
             }
             if(!found){
+                cout << "hello" <<endl;
                 pedals.at(i)->engaged = true;
             }
         }
