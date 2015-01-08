@@ -110,15 +110,18 @@ void ofApp::audioRequested 	(float * output, int bufferSize, int nChannels){
             }
         }
         counter++;
+        //making sure that it doesn't run forever.
         if(counter > numPedals){
             counter = 0;
             chainFound = true;
         }
     }
-    
+    //Checking if audio out is connected and that the last pedal in the chain is indeed the pedal that is connected to the output.
+    //this helps me avoid incomplete chains.
     if(audioIn.isConnected() && audioOut.isConnected() && &pedals.at(lastPedal)->getOutput() == &audioOut.getConnection()){
         for (int i = 0; i < bufferSize; i++){
             
+            //For a better user experience I split the audio to stereo.
             mymix.stereo(myInput[i], outputs, 0.5);
             
             output[i*nChannels] = outputs[0];
@@ -127,6 +130,7 @@ void ofApp::audioRequested 	(float * output, int bufferSize, int nChannels){
     }
     else{
         for (int i = 0; i < bufferSize; i++){
+            //putting 0s everywhere if there is no complete chain of pedals from audio in to audio out.
             output[i*nChannels] = 0;
             output[i*nChannels+1] = 0;
         }
@@ -153,6 +157,8 @@ void ofApp::keyReleased(int key){
 
 //--------------------------------------------------------------
 void ofApp::mouseMoved(int x, int y ){
+    
+    //doing the color changing of the pedals inputs and the audio in/out if they are connected and hovered.
     for(int i = 0; i < numPedals; i++){
         if(pedals.at(i)->getInput().isConnected() && pedals.at(i)->getInput().isInBounds(x, y)){
             if(pedals.at(i)->getInput().getColor() != 255){
@@ -175,8 +181,11 @@ void ofApp::mouseMoved(int x, int y ){
 
 //--------------------------------------------------------------
 void ofApp::mouseDragged(int x, int y, int button){
+    
+    
     for(int i = 0; i < numPedals; i++){
         if(pedals.at(i)->isEngaged() && pedals.at(i)->isInBounds(x,y)){
+            //the logic of moving the pedals.
             double deltax = x-prevx;
             double deltay = y-prevy;
             pedals.at(i)->move(deltax, deltay);
@@ -184,6 +193,7 @@ void ofApp::mouseDragged(int x, int y, int button){
             prevy = y;
         }
         else{
+            //the logic of changing the value of a knob.
             float mouseRange = 200;
             for(int j = 0 ; j < pedals.at(i)->getNumKnobs() ; j++){
                 if(pedals.at(i)->getKnob(j).isEngaged()){
@@ -196,6 +206,7 @@ void ofApp::mouseDragged(int x, int y, int button){
             }
         }
     }
+    //if a user is dragging the 'cable' from an input towards an output, the target x and y of this line will be the current x,y mouse values.
     if(drawLine){
         targetX = x;
         targetY = y;
