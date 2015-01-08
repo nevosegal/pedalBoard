@@ -22,18 +22,12 @@ BypassButton::BypassButton(double x, double y){
     bypassed = true;
 }
 
-void BypassButton::setup(){
-    
-}
-
-void BypassButton::update(){
-}
-
 void BypassButton::draw(){
-
+    //changing the bypass button color according to its state.
     if(bypassed){
         ofSetColor(200, 35, 35, 75);
-    }else{
+    }
+    else{
         ofSetColor(200, 35, 35);
     }
     ofCircle(x, y, radius);

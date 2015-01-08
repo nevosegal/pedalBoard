@@ -15,18 +15,19 @@
 class BypassButton{
 
 public:
+    
+    //constructors
     BypassButton();
     BypassButton(double x, double y);
     
-    //methods
-    void setup();
-    void update();
+    //class methods
     void draw();
     double getX();
     double getY();
     void toggle();
     bool isInBounds(int x, int y);
     
+    //class variables.
     bool bypassed;
     double x, y, radius;
     

@@ -10,6 +10,8 @@
 
 DelayPedal::DelayPedal(double x, double y, int id)
 :Pedal(x, y, id){
+    
+    //creating new knobs, passing their position, range, and name.
     numKnobs = 2;
     knobs = new Knob[numKnobs];
     knobs[0] = *new Knob(x+(xsize/4), y+(ysize/4), 20000, "Delay Time");
@@ -21,15 +23,18 @@ DelayPedal::DelayPedal(){
     knobs = new Knob[numKnobs];
 }
 
+//As this is a delay pedal, the effect it delay :P. I'm using Maximilian maxiDelayLine
 float* DelayPedal::effect(float* input, int bufferSize){
     if(!bypass_btn.bypassed){
         for(int i = 0; i < bufferSize; i++){
+            //I pass the values of the knobs directly to the delay line function.
             input[i] = (input[i] + (float)mdl.dl((double)input[i], knobs[0].getValue(), knobs[1].getValue()))/2;
         }
     }
     return input;
 }
 
+//the delayPedal specific draw function.
 void DelayPedal::draw(){
     ofFill();
     ofSetHexColor(0x075C00);

@@ -19,10 +19,11 @@ class Pedal{
     
 public:
     
-    //constructor
+    //constructors
     Pedal();
     Pedal(double x, double y, int id);
     
+    //class methods. some are virtual and will be overriden by child class.
     virtual void draw();
     BypassButton& getBypassButton();
     void move(double x, double y);
@@ -37,7 +38,7 @@ public:
     int getNumKnobs();
     Knob& getKnob(int index);
     
-    //members
+    //class variables
     double x, y, xsize, ysize;
     BypassButton bypass_btn;
     bool engaged;
@@ -45,6 +46,8 @@ public:
     InputOutput output;
     int id;
     int numKnobs;
+    
+    //an array of knobs. the size of this array is changed according to the number of parameters each pedal needs.
     Knob* knobs;
     ofTrueTypeFont header;
 
