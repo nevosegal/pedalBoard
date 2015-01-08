@@ -15,22 +15,25 @@ void ofApp::setup(){
     background.loadImage("background.jpg");
     ofSetVerticalSync(true);
 
-    sampleRate 			= 44100; /* Sampling Rate */
-    initialBufferSize	= 512;	/* Buffer Size. you have to fill this buffer with sound*/
+    sampleRate 			= 44100;
+    initialBufferSize	= 512;
     myInput = new float[initialBufferSize];
     numPedals = 4;
     
+    //creating new pedals
     dp = *new DelayPedal(80,75,6);
     distortion = *new DistortionPedal(310,75,7);
     flanger = *new FlangerPedal(540,75,8);
     chorus = *new ChorusPedal(770,75,9);
     
+    //pushing them all to a new array of type Pedal.
     pedals.push_back(&dp);
     pedals.push_back(&distortion);
     pedals.push_back(&flanger);
     pedals.push_back(&chorus);
 
     cableColor = 80;
+    //Creating new audio in and audio out.
     audioIn = *new InputOutput("input", 10, (double)ofGetHeight()/2);
     audioOut = *new InputOutput("output", ofGetWidth() - 10, (double)ofGetHeight()/2);
     ofSoundStreamSetup(2,1,this, sampleRate, initialBufferSize, 4);
@@ -42,8 +45,12 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-    ofSetColor(200);
+    ofSetColor(255);
+    
+    //drawing the wooden floor
     background.draw(0, 0, ofGetWidth(), ofGetHeight());
+
+    //drawing the pedals
     for (int i = 0; i < numPedals; i++) {
         pedals.at(i)->draw();
     }
@@ -51,38 +58,50 @@ void ofApp::draw(){
     ofSetColor(cableColor);
     
     if(drawLine){
+        //drawing the line when the user is holding the mouse key.
         ofSetLineWidth(3);
         ofLine(startX, startY, targetX, targetY);
     }
+    
     for(int i = 0; i < numPedals ; i++){
+        //if there has been a connection between two pedals, draw a line between them
         if(pedals.at(i)->getInput().isConnected()){
             ofLine(pedals.at(i)->getInput().getConnection().getX(), pedals.at(i)->getInput().getConnection().getY(), pedals.at(i)->getInput().getX(), pedals.at(i)->getInput().getY());
         }
+        //same goes for audio out.
         if(audioOut.isConnected()){
             ofLine(audioOut.getConnection().getX(), audioOut.getConnection().getY(), audioOut.getX(), audioOut.getY());
         }
     }
+    
+    //drawing the audio in and audio out.
     audioIn.draw();
     audioOut.draw();
 }
 
 //--------------------------------------------------------------
+
 bool chainFound = false;
 int lastPedal = 0;
 int counter = 0;
+
 void ofApp::audioRequested 	(float * output, int bufferSize, int nChannels){
 
+    /*In this section I do some logic as to what pedals should I pass the audio to.*/
     chainFound = false;
     if(audioIn.isConnected()){
         for(int i = 0 ; i < numPedals; i++) {
+            //I start with the audio in, I check if there is a pedal connected to it and if so, which one.
             if(&pedals.at(i)->getInput() == &audioIn.getConnection()){
                 lastPedal = i;
+                //I call the effect function of this pedal. (as I'm using morphism, it doesn't matter what pedal it is, they are all of type pedal)
                 myInput = pedals.at(i)->effect(myInput, bufferSize);
                 break;
             }
         }
     }
     
+    //Here I check for the rest of the chain. Every iteration, when I find a match between an output of a pedal and an input of another pedal, I set the index of the last pedal.
     while(!chainFound){
         for(int i = 0; i < numPedals; i++){
             if(pedals.at(i)->getInput().isConnected() && &pedals.at(i)->getInput().getConnection() == &pedals.at(lastPedal)->getOutput()){
