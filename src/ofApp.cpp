@@ -218,23 +218,27 @@ int tempPedal;
 void ofApp::mousePressed(int x, int y, int button){
     bool found = false;
     for(int i = 0; i < numPedals; i++){
+        //checking if a pedal is being clicked.
         if(pedals.at(i)->isInBounds(x, y) && !pedals.at(i)->getOutput().isInBounds(x, y) &&
            !pedals.at(i)->getInput().isInBounds(x, y) && !pedals.at(i)->bypass_btn.isInBounds(x, y)){
             prevx = x;
             prevy = y;
             if(pedals.at(i)->getNumKnobs() != 0){
                 for(int j = 0; j < pedals.at(i)->getNumKnobs(); j++){
+                    //checking if a knob whithin this pedal is being clicked.
                     if(pedals.at(i)->getKnob(j).isHovered(x,y)){
+                        //if so, I know that the user tried to click the knob and not the pedal.
                         found = true;
                         pedals.at(i)->getKnob(j).engaged = true;
                     }
                 }
             }
+            //if not, I take the pedal.
             if(!found){
-                cout << "hello" <<endl;
                 pedals.at(i)->engaged = true;
             }
         }
+        //If the click wasn't in the bounds of the pedal, but in the bounds of an output (and the output is not already connected to anything).
         else if(pedals.at(i)->getOutput().isInBounds(x,y) && !pedals.at(i)->getOutput().isConnected()){
             tempPedal = i;
             startX = x;
@@ -243,14 +247,17 @@ void ofApp::mousePressed(int x, int y, int button){
             targetY = y;
             drawLine = true;
         }
+        //If the click was on an input and this input is connected, disconnect.
         else if(pedals.at(i)->getInput().isInBounds(x,y)){
             pedals.at(i)->getInput().getConnection().disconnect();
             pedals.at(i)->getInput().disconnect();
         }
+        //If audio out was clicked and it is connected, disconnect.
         else if(audioOut.isInBounds(x, y)){
             audioOut.disconnect();
             audioOut.getConnection().disconnect();
         }
+        //If audio in was clicked.
         else if(audioIn.isInBounds(x, y)){
             tempPedal = 100;
             startX = x;
@@ -266,10 +273,12 @@ void ofApp::mousePressed(int x, int y, int button){
 void ofApp::mouseReleased(int x, int y, int button){
     for(int i = 0; i < numPedals; i++){
         BypassButton & bb = pedals.at(i)->getBypassButton();
+        //if a bypass button was hovered when mouse released, toggle it.
         if(bb.isInBounds(x, y)){
             bb.toggle();
             break;
         }
+        //if a pedal input is hovered, set its connection to the output of the pedal that was originally clicked.
         if (tempPedal != 100 && !pedals.at(i)->getInput().isConnected() && drawLine){
             if(pedals.at(i)->getInput().isInBounds(x, y)){
                 pedals.at(i)->getInput().setConnection(pedals.at(tempPedal)->getOutput());
@@ -277,6 +286,7 @@ void ofApp::mouseReleased(int x, int y, int button){
                 break;
             }
         }
+        //same goes for audio out.
         if(tempPedal != 100 && !audioOut.isConnected() && drawLine){
             if(audioOut.isInBounds(x, y)){
                 audioOut.setConnection(pedals.at(tempPedal)->getOutput());
@@ -284,14 +294,17 @@ void ofApp::mouseReleased(int x, int y, int button){
                 break;
             }
         }
+        //same goes for audio in.
         if (tempPedal == 100 && !audioIn.isConnected() && drawLine && pedals.at(i)->getInput().isInBounds(x, y)){
             pedals.at(i)->getInput().setConnection(audioIn);
             audioIn.setConnection(pedals.at(i)->getInput());
             break;
         }
+        //disengage all pedals.
         pedals.at(i)->engaged = false;
         if(pedals.at(i)->getNumKnobs() != 0){
             for(int j = 0; j < pedals.at(i)->getNumKnobs(); j++){
+                //disengage all knobs.
                 if(pedals.at(i)->getKnob(j).isEngaged()){
                     pedals.at(i)->getKnob(j).engaged = false;
                 }
@@ -321,9 +334,4 @@ void ofApp::dragEvent(ofDragInfo dragInfo){
 
 void ofApp::exit(){
     ofSoundStreamClose();
-}
-
-void ofApp::drawInOut(){
-    int h = ofGetHeight();
-    int w  = ofGetWidth();
 }
