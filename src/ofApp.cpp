@@ -140,6 +140,7 @@ void ofApp::audioRequested 	(float * output, int bufferSize, int nChannels){
 }
 //--------------------------------------------------------------
 void ofApp::audioReceived (float * input, int bufferSize, int nChannels){
+    //grabbing the mic audio in and putting it in an array.
     for (int i = 0; i < bufferSize; i++){
         myInput[i] = input[i];
     }

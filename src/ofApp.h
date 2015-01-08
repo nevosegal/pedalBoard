@@ -14,11 +14,12 @@
 class ofApp : public ofBaseApp{
     
 public:
-    ~ofApp();/* destructor is very useful */
+    ~ofApp();
+    
+    //basic openframeworks functions
     void setup();
     void update();
     void draw();
-    
     void keyPressed  (int key);
     void keyReleased(int key);
     void mouseMoved(int x, int y );
@@ -29,26 +30,42 @@ public:
     void dragEvent(ofDragInfo dragInfo);
     void gotMessage(ofMessage msg);
     void exit();
-    void drawInOut();
-    void audioRequested 	(float * input, int bufferSize, int nChannels); /* output method */
-    void audioReceived 	(float * input, int bufferSize, int nChannels); /* input method */
+    void audioRequested(float * input, int bufferSize, int nChannels); /* output method */
+    void audioReceived(float * input, int bufferSize, int nChannels); /* input method */
     
-    int		initialBufferSize; /* buffer size */
-    int		sampleRate;
+    int	initialBufferSize;
+    int	sampleRate;
+    
+    //used for the previous mouse position.
     double prevx, prevy;
+    
+    //number of pedals.
     int numPedals;
+    
+    //A vector that stores the pedals.
     std::vector<Pedal*> pedals;
+    
+    //All the individual pedals with their type.
     DelayPedal dp;
     DistortionPedal distortion;
     FlangerPedal flanger;
     ChorusPedal chorus;
+    
+    //array to store the mic input.
     float *myInput;
+    
+    //variables for drawing the temporary line between pedals.
     double startX, startY, targetX, targetY;
     bool drawLine = false;
     int cableColor;
+    
+    //Audio in and out.
     InputOutput audioIn, audioOut;
+    
+    //background image
     ofImage background;
     ofxMaxiMix mymix;
+    
     double outputs[2];
     
 };
