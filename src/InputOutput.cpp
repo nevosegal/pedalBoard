@@ -20,13 +20,34 @@ InputOutput::InputOutput(string type,double x, double y){
     col = 120;
 }
 
+//getters
+
+//getting the input/output its connected to.
+InputOutput& InputOutput::getConnection(){
+    return *inputOutput;
+}
+
+double InputOutput::getX(){
+    return x;
+}
+
+double InputOutput::getY(){
+    return y;
+}
+
+int InputOutput::getColor(){
+    return col;
+}
+
+//setters
+void InputOutput::setColor(int col){
+    this->col = col;
+}
+
+//setting the input/output its connected to.
 void InputOutput::setConnection(InputOutput& inOut){
     inputOutput = &inOut;
     connected = true;
-}
-
-InputOutput& InputOutput::getConnection(){
-    return *inputOutput;
 }
 
 void InputOutput::disconnect(){
@@ -43,6 +64,7 @@ void InputOutput::draw(){
     ofCircle(x, y, radius);
 }
 
+//checking if the input/output is hovered.
 bool InputOutput::isInBounds(int x, int y){
     if(x > (this->x - radius) && x < (this->x + radius) && y > (this->y - radius) && y < (this->y + radius)){
         return true;
@@ -50,20 +72,5 @@ bool InputOutput::isInBounds(int x, int y){
     return false;
 }
 
-double InputOutput::getX(){
-    return x;
-}
-
-double InputOutput::getY(){
-    return y;
-}
-
-void InputOutput::setColor(int col){
-    this->col = col;
-}
-
-int InputOutput::getColor(){
-    return col;
-}
 
 

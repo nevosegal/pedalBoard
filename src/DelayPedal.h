@@ -27,6 +27,7 @@ public:
     void draw();
     float* effect(float* input, int bufferSize);
     
+    //effect
     maxiDelayline mdl;
 };
 

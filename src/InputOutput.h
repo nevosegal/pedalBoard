@@ -17,9 +17,12 @@ class Pedal;
 
 class InputOutput{
 public:
+    
+    //constructors
     InputOutput();
     InputOutput(string type,double x, double y);
     
+    //class methods
     void disconnect();
     bool isConnected();
     void draw();
@@ -30,10 +33,11 @@ public:
     void setConnection(InputOutput &inOut);
     int getColor();
     void setColor(int col);
+    
+    //class variables
     bool connected;
     string type;
     InputOutput *inputOutput;
-
     double x,y;
     int radius;
     int col;

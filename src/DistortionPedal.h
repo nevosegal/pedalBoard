@@ -14,13 +14,19 @@
 #include "Pedal.h"
 #include "ofxMaxim.h"
 
-
+//This class inherits class Pedal and overrides some of its methods.
 class DistortionPedal: public Pedal{
 public:
+    
+    //constructors
     DistortionPedal(double x, double y, int id);
     DistortionPedal();
+    
+    //overriden methods
     void draw();
     float* effect(float* input, int bufferSize);
+    
+    //effect
     maxiDistortion distortion;
 };
 

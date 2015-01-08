@@ -9,6 +9,8 @@
 #include "FlangerPedal.h"
 FlangerPedal::FlangerPedal(double x, double y, int id)
 :Pedal(x, y, id){
+    
+    //creating the knobs
     numKnobs = 4;
     knobs = new Knob[numKnobs];
     knobs[0] = *new Knob(x+(xsize/4), y+(ysize/4), 1000, "Delay Time");
@@ -21,21 +23,19 @@ FlangerPedal::FlangerPedal(){
     knobs = new Knob[numKnobs];
 }
 
+
+//as this is a flangerPedal, I use a flange effect :P.
 float* FlangerPedal::effect(float* input, int bufferSize){
     if(!bypass_btn.bypassed){
         for(int i = 0; i < bufferSize; i++){
-            //flange params:
-                //input
-                //delay : tbd
-                //feedback: 0-1
-                //lfo speed: 0-10
-                //depth: 0-1
+            //I pass the values of the knobs directly to the flange function.
             input[i] = flanger.flange((double)input[i], knobs[0].getValue(), knobs[1].getValue(), knobs[2].getValue(), knobs[3].getValue());
         }
     }
     return input;
 }
 
+//flangerPedal specific draw function.
 void FlangerPedal::draw(){
     ofFill();
     ofSetHexColor(0x295186);

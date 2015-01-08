@@ -14,13 +14,19 @@
 #include "Pedal.h"
 #include "ofxMaxim.h"
 
-
+//This class inherits class Pedal and overrides some of its methods.
 class ChorusPedal: public Pedal{
 public:
+    
+    //constructors
     ChorusPedal(double x, double y, int id);
     ChorusPedal();
+    
+    //overriden methods
     void draw();
     float* effect(float* input, int bufferSize);
+    
+    //effect
     maxiChorus chorus;
 };
 
