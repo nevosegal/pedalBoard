@@ -20,7 +20,8 @@ Knob::Knob(float x, float y, float range, string name){
     this->radius = 20;
     this->engaged = false;
     this->name = name;
-    tf.loadFont("Cuprum-Bold.ttf", fontSize);
+    fontSize = 8;
+    tf.loadFont("Raleway-Bold.ttf", fontSize);
 }
 
 
@@ -50,10 +51,10 @@ void Knob::draw(){
     
     //calculating the rectangle around the text in order to get its width and then center it properly.
     ofRectangle typeRect = tf.getStringBoundingBox(name, 0, 0);
-    ofRectangle valueRect = tf.getStringBoundingBox(ofToString(value), 0, 0);
+    ofRectangle valueRect = tf.getStringBoundingBox(ofToString(round(this->value*100)/100.0), 0, 0);
     ofSetColor(220,220,220);
     tf.drawString(name, this->x-(typeRect.width/2), this->y-this->radius-5);
-    tf.drawString(ofToString(this->value), this->x-(valueRect.width/2), this->y+(fontSize/2));
+    tf.drawString(ofToString(round(this->value*100)/100.0), this->x-(valueRect.width/2), this->y+(fontSize/2));
 }
 
 //check when the knob is hovered.
